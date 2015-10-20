@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Meet the Technicians - IN DEVELOPMENT
-Plugin URI:  http://tophattechnicians.com
+Plugin URI:  https://github.com/FRC4014/meet-the-technicians
 Description: Replaces a page called "Meet the Technicians" with a nicely designed grid of the HT^3 cast.  Also makes a widget with a 'random technician'.
 Version:     1.0
 Author:      Lucas LeVieux
