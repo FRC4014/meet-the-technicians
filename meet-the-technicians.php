@@ -42,8 +42,8 @@ function meet_technicians_menu() {
 	add_options_page( "Meet The Technicians", "Meet The Technicians", 'manage_options', "meet-the-technicians.php", "meet_technicians_options"); 
 	}
 function meet_technicians_options() {
-	//echo "hi";
-	include_once("options.php");
+	//code for options page goes here
+	require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/options.php");
 	}
 
 if ( $meettechniciansversion != get_option( "meettechniciansversion" ) ) createTechniciansTable();
