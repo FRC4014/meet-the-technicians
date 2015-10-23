@@ -12,8 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 $meettechniciansversion = "1.1";
 function meet_technicians($the_content) {
 	if (get_the_title() == "Meet the Technicians"){
-	  //code for the page goes here
-		$the_content = '<p>hi</p>';
+		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/page.php"); //seperate file for page code
 		}
   	return $the_content;
 	}
