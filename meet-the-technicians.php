@@ -10,7 +10,7 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-$tableversion = "11"; //arbitrary, change when table structure changes
+$tableversion = "12"; //arbitrary, change when table structure changes
 function meet_technicians($the_content) {
 	if (get_the_title() == "Meet the Technicians"){
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/page.php"); //seperate file for page code
@@ -26,7 +26,7 @@ function createTechniciansTable() {
 		name varchar(30) NOT NULL,
 		grade smallint(2) NOT NULL,
 		years smallint(2) NOT NULL,
-		title varchar(40) NOT NULL,
+		title varchar(60) NOT NULL,
 		pic varchar(55) NOT NULL,
 		description varchar(200),
 		quote varchar(50),
