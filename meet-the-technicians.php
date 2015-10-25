@@ -9,7 +9,8 @@ Author URI:  http://lucaslevieux.com
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-$meettechniciansversion = "1.2";
+
+$tableversion = "11"; //arbitrary, change when table structure changes
 function meet_technicians($the_content) {
 	if (get_the_title() == "Meet the Technicians"){
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/page.php"); //seperate file for page code
@@ -17,7 +18,7 @@ function meet_technicians($the_content) {
   	return $the_content;
 	}
 function createTechniciansTable() {
-	global $wpdb, $meettechniciansversion;
+	global $wpdb, $tableversion, $update_result;
 	$charset_collate = $wpdb->get_charset_collate();
 	$table_name = $wpdb->prefix . "meettechnicians"; 
 	
@@ -28,20 +29,20 @@ function createTechniciansTable() {
 		title varchar(40) NOT NULL,
 		pic varchar(55) NOT NULL,
 		description varchar(200),
-		quote varchar(50)
+		quote varchar(50),
 		hobbies varchar(50),
-		UNIQUE KEY name (name)
+		PRIMARY KEY (name)
 		) $charset_collate;";
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	dbDelta( $sql );
-	update_option( 'meettechniciansversion', $meettechniciansversion );
+	$update_result = dbDelta( $sql );
+	update_option( 'meettechniciansversion', $tableversion );
 	add_action( 'admin_notices', 'table_updated_notice' ); //display a notice
 	}
 function table_updated_notice() {
 	//to be add_actioned at "admin_notices"
     ?>
     <div class="updated">
-        <p>Meet the Technicians: Table updated!</p>
+        <p>Meet the Technicians: Table updated to version <?= $GLOBALS[tableversion] ?></p>
     </div>
     <?php
 	}
@@ -54,7 +55,7 @@ function meet_technicians_options() {
 	require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/options.php");
 	}
 
-if ( $meettechniciansversion != get_option( "meettechniciansversion" ) ) createTechniciansTable();
+if ( $tableversion != get_option( "meettechniciansversion" ) ) createTechniciansTable();
 
 
 add_action( 'admin_menu', 'meet_technicians_menu' );
