@@ -3,7 +3,7 @@
 ?>
 
 <div class="wrap">
-<form method="post" action="options.php"> 
+<form method="post" action=""> 
 <h2>Meet The Technicians</h2>
 
 <?php
@@ -14,7 +14,16 @@ foreach($technicians as $person){
 	echo '<div id="mt_person">' . $person->name . '</div>';
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
 		echo '<div id="mt_label">' . $attribute . '</div>';
-		echo '<input type="text" name="' . 'mt_' . $person->name . "_" . $attribute . '" value="' . $person->$attribute . '" />' . "\n";
+		if ($attribute == "description"){ //for longer fields
+			echo '<textarea name="' . 'mt_' . $person->name . "_" . $attribute . '">';
+			echo $person->$attribute;
+			echo '</textarea>' . "\n";
+			}
+		else {
+			echo '<input type="text" name="' . 'mt_' . $person->name . "_" . $attribute . 
+					'" value="' . $person->$attribute . 
+					'" />' . "\n";
+			}
 		}
 	}
 ?>
