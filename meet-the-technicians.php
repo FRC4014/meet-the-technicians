@@ -9,7 +9,7 @@ Author URI:  http://lucaslevieux.com
 License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
-$meettechniciansversion = "1.1";
+$meettechniciansversion = "1.2";
 function meet_technicians($the_content) {
 	if (get_the_title() == "Meet the Technicians"){
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/page.php"); //seperate file for page code
@@ -35,8 +35,17 @@ function createTechniciansTable() {
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	dbDelta( $sql );
 	update_option( 'meettechniciansversion', $meettechniciansversion );
+	add_action( 'admin_notices', 'table_updated_notice' ); //display a notice
 	}
-
+function table_updated_notice() {
+	//to be add_actioned at "admin_notices"
+    ?>
+    <div class="updated">
+        <p>Meet the Technicians: Table updated!</p>
+    </div>
+    <?php
+	}
+	
 function meet_technicians_menu() {
 	add_options_page( "Meet The Technicians", "Meet The Technicians", 'manage_options', "meet-the-technicians.php", "meet_technicians_options"); 
 	}
