@@ -1,4 +1,9 @@
 <?php //file to output to the page using $the_content.  Included in meet-the-technicians.php.
+?>
+
+<link rel="stylesheet" type="text/css" href="<?= home_url( '/wp-content/plugins/meet-the-technicians/page.css' ) ?>" media="screen"/>
+
+<?php
 global $wpdb;
 $tablename = $wpdb->prefix . "meettechnicians";
 $technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY ID", OBJECT );

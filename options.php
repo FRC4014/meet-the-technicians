@@ -18,7 +18,7 @@ if (isset($_POST["save"])){ //save POST data to database
 	
 
 ?>
-
+<link rel="stylesheet" type="text/css" href="<?= home_url( '/wp-content/plugins/meet-the-technicians/options.css' ) ?>" media="screen"/>
 <div class="wrap">
 <form method="post" action=""> 
 <h2>Meet The Technicians</h2>
@@ -52,7 +52,7 @@ foreach($technicians as $person){
 <?php
 /* don"t mind me, I'm just a sql query!
 insert into $meettechnicians
-(name, grade, years, title, pic, description, quote, hobbies)
-values ('Lucas LeVieux', '12', '2', 'Programming (Lead), Electrical, Twitter, Webmaster', 'http://dummy.url', 'does cool stuff', 'and the truth is, we don&apost know anything', 'butter');
+(id, name, grade, years, title, pic, description, quote, hobbies)
+values (1, 'Lucas LeVieux', '12', '2', 'Programming (Lead), Electrical, Twitter, Webmaster', 'http://dummy.url', 'does cool stuff', 'and the truth is, we don&apos;t know anything', 'butter');
 */
 ?>
