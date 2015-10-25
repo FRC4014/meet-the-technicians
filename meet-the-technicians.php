@@ -10,7 +10,7 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */
 
-$tableversion = "12"; //arbitrary, change when table structure changes
+$tableversion = "16"; //arbitrary, change when table structure changes
 function meet_technicians($the_content) {
 	if (get_the_title() == "Meet the Technicians"){
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/page.php"); //seperate file for page code
@@ -23,6 +23,7 @@ function createTechniciansTable() {
 	$table_name = $wpdb->prefix . "meettechnicians"; 
 	
 	$sql = "CREATE TABLE $table_name (
+		id smallint(5) NOT NULL,
 		name varchar(30) NOT NULL,
 		grade smallint(2) NOT NULL,
 		years smallint(2) NOT NULL,
@@ -31,7 +32,7 @@ function createTechniciansTable() {
 		description varchar(200),
 		quote varchar(50),
 		hobbies varchar(50),
-		PRIMARY KEY (name)
+		PRIMARY KEY (id)
 		) $charset_collate;";
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 	$update_result = dbDelta( $sql );

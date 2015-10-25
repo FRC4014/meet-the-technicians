@@ -9,18 +9,18 @@
 <?php
 global $wpdb;
 $tablename = $wpdb->prefix . "meettechnicians";
-$technicians = $wpdb->get_results( "SELECT * FROM $tablename", OBJECT );
+$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", OBJECT );
 foreach($technicians as $person){
 	echo '<div id="mt_person">' . $person->name . '</div>';
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
-		echo '<div id="mt_label">' . $attribute . '</div>';
+		echo '<div id="mt_label_">' . $attribute . '</div>';
 		if ($attribute == "description"){ //for longer fields
-			echo '<textarea name="' . 'mt_' . $person->name . "_" . $attribute . '">';
+			echo '<textarea name="' . 'mt_' . $person->id . "_" . $attribute . '">';
 			echo $person->$attribute;
 			echo '</textarea>' . "\n";
 			}
 		else {
-			echo '<input type="text" name="' . 'mt_' . $person->name . "_" . $attribute . 
+			echo '<input type="text" name="' . 'mt_' . $person->id . "_" . $attribute . 
 					'" value="' . $person->$attribute . 
 					'" />' . "\n";
 			}
