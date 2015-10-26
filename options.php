@@ -37,9 +37,10 @@ foreach($technicians as $person){
 		quote => array("Quote", 50, false, 30), 
 		hobbies => array("Hobbies", 50, false, 30)
 			);
+	
 	foreach ($fields as $attribute => $info){
 		$id = 'mt_' . $person->id . "_" . $attribute;
-		echo '<label class="mt_label">' . $info[0];
+		echo '<div class="mt_field"><label class="mt_label">' . $info[0] . '</label>';
 		if (!$info[2]) { //isn't required field
 			echo ' <span class="mt_optional">optional</span>';
 			}
@@ -55,7 +56,7 @@ foreach($technicians as $person){
 					'" value="' . $person->$attribute . 
 					'" maxlength = "' . $info[1] .
 					'" size = "' . $size .
-					'"/>' . '</label>' . "\n";
+					'"/></div>' . "\n";
 			}
 		}
 	echo '</fieldset>';
