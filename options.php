@@ -2,11 +2,11 @@
 //this file will be require_once'd for the options page.
 
 global $wpdb;
-$tablename = $wpdb->prefix . "meettechnicians";
+$tablename = $this->getTableName();
 
 if (isset($_POST["submit"])){ //save POST data to database
 	//print_r($_POST); //very useful when testing
-	$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
+	$technicians = $this->getAll();
 	$save_data = $_POST;
 	unset($save_data["submit"]);
 	$data_array = array();
@@ -27,22 +27,32 @@ if (isset($_POST["submit"])){ //save POST data to database
 	foreach ($data_array as $db_id => $data){
 		$new_array[] = array_merge(array("id" => $db_id), $data);
 		}
+	$thingsChanged = 0;
 	foreach ($new_array as $person => $data){
 		$differences = array_diff($data, $technicians[$person]);
-		print_r($differences);
+		//print_r($differences);
 		foreach ($differences as $name => $value){
 			if (gettype($value) == "string") {$datatype = '%s';}
 			else {$datatype = '%d';}
-			print_r(array($name => $value));
-			echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
+			//echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
 			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
 			
 			if ($succeed !== false){ //can be successful and return 0
-				admin_notice ("Saved. $succeed lines changed!");
+				$thingsChanged += $succeed;
 				}
 			else {
-				notsaved_notice();
+				$this->adminNotice("Not saved", "error");
+				break 2;
 				}
+			}
+		if ($thingsChanged > 1){
+			$this->adminNotice ("Saved. $thingsChanged fields changed!");
+			}
+		else if ($thingsChanged === 1){
+			$this->adminNotice ("Saved. One field changed!");
+			}
+		else {
+			$this->adminNotice ("No changes to save.", "error");
 			}
 		}
 	}
@@ -54,7 +64,7 @@ if (isset($_POST["submit"])){ //save POST data to database
 <h2>Meet The Technicians</h2>
 
 <?php
-$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
+$technicians = $this->getAll();
 //print_r($technicians); //very useful when testing
 
 
