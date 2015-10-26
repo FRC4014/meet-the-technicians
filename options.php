@@ -4,14 +4,22 @@
 global $wpdb;
 $tablename = $wpdb->prefix . "meettechnicians";
 
-if (isset($_POST["save"])){ //save POST data to database
-	foreach ($_POST as $attribute => $data){
-		$mt_id = substr($attribute, 
-				strpos($attribute, "_") + 1, //after of first _
-				strpos($attribute, "_", strpos($attribute, "_") + 1) -
-					(strpos($attribute, "_") + 1) //before second _, after first _
+if (isset($_POST["submit"])){ //save POST data to database
+	print_r($_POST); //very useful when testing
+	$save_data = $_POST;
+	unset($save_data["submit"]);
+	foreach ($save_data as $sliver => $data){
+		//echo "\n" . $sliver;
+		$mt_id = substr($sliver, 
+				strpos($sliver, "_") + 1, //after of first _
+				strpos($sliver, "_", strpos($sliver, "_") + 1) -
+				(strpos($sliver, "_") + 1) //before second _, after first _
 				);
-		echo $mt_id;
+		$attribute = substr($sliver, 
+				strpos($sliver, $mt_id) + 2 //after _, after id
+				);
+		
+		echo "id: $mt_id, attribute: $attribute, data: $data<br>";
 		}
 	$sql = "INSERT INTO...";
 	notsaved_notice();
@@ -26,7 +34,7 @@ if (isset($_POST["save"])){ //save POST data to database
 <?php
 
 $technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
-print_r($technicians);
+//print_r($technicians); //very useful when testing
 
 foreach($technicians as $person){
 	echo '<fieldset class="mt_person"><legend>' . $person[name] . '</legend>' . "\n";
@@ -77,7 +85,6 @@ foreach($technicians as $person){
 	}
 ?>
 
-<input type="checkbox" name="save" style="display: none;" checked="checked">
 <p>
 <input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
