@@ -5,11 +5,12 @@ global $wpdb;
 $tablename = $wpdb->prefix . "meettechnicians";
 
 if (isset($_POST["submit"])){ //save POST data to database
-	print_r($_POST); //very useful when testing
+	//print_r($_POST); //very useful when testing
+	$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
 	$save_data = $_POST;
 	unset($save_data["submit"]);
+	$data_array = array();
 	foreach ($save_data as $sliver => $data){
-		//echo "\n" . $sliver;
 		$mt_id = substr($sliver, 
 				strpos($sliver, "_") + 1, //after of first _
 				strpos($sliver, "_", strpos($sliver, "_") + 1) -
@@ -18,11 +19,32 @@ if (isset($_POST["submit"])){ //save POST data to database
 		$attribute = substr($sliver, 
 				strpos($sliver, $mt_id) + 2 //after _, after id
 				);
+		$data_array[$mt_id][$attribute] = $data;
 		
-		echo "id: $mt_id, attribute: $attribute, data: $data<br>";
+		//echo "id: $mt_id, attribute: $attribute, data: $data<br>";
 		}
-	$sql = "INSERT INTO...";
-	notsaved_notice();
+	$new_array = array();
+	foreach ($data_array as $db_id => $data){
+		$new_array[] = array_merge(array("id" => $db_id), $data);
+		}
+	foreach ($new_array as $person => $data){
+		$differences = array_diff($data, $technicians[$person]);
+		print_r($differences);
+		foreach ($differences as $name => $value){
+			if (gettype($value) == "string") {$datatype = '%s';}
+			else {$datatype = '%d';}
+			print_r(array($name => $value));
+			echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
+			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
+			
+			if ($succeed !== false){ //can be successful and return 0
+				admin_notice ("Saved. $succeed lines changed!");
+				}
+			else {
+				notsaved_notice();
+				}
+			}
+		}
 	}
 	
 
@@ -32,9 +54,9 @@ if (isset($_POST["submit"])){ //save POST data to database
 <h2>Meet The Technicians</h2>
 
 <?php
-
 $technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
 //print_r($technicians); //very useful when testing
+
 
 foreach($technicians as $person){
 	echo '<fieldset class="mt_person"><legend>' . $person[name] . '</legend>' . "\n";
@@ -93,11 +115,3 @@ foreach($technicians as $person){
 <?php $page = get_page_by_title('Meet The Technicians'); ?>
 <a href="<?= get_page_link($page->ID) ?>" class="mt_viewpage">View Page</a>
 </div>
-
-<?php
-/* don"t mind me, I'm just a sql query!
-insert into $meettechnicians
-(id, name, grade, years, title, pic, description, quote, hobbies)
-values (1, 'Lucas LeVieux', '12', '2', 'Programming (Lead), Electrical, Twitter, Webmaster', 'http://dummy.url', 'does cool stuff', 'and the truth is, we don&apos;t know anything', 'butter');
-*/
-?>
