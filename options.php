@@ -46,7 +46,7 @@ foreach($technicians as $person){
 			}
 		echo '</label>';
 		
-		if ($attribute == "description"){ //for longer fields
+		if ($attribute == "description"){ //for longer (paragraph) fields
 			echo '<textarea name="' . $id . '">';
 			echo $person->$attribute;
 			echo '</textarea>'  . '</label>'. "\n";
@@ -66,10 +66,12 @@ foreach($technicians as $person){
 ?>
 
 <input type="checkbox" name="save" style="display: none;" checked="checked">
-<?php submit_button(); 
-$page = get_page_by_title('Meet The Technicians');
-?>
+<p>
+<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
+<input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
+</p>
 </form>
+<?php $page = get_page_by_title('Meet The Technicians'); ?>
 <a href="<?= get_page_link($page->ID) ?>" class="mt_viewpage">View Page</a>
 </div>
 
