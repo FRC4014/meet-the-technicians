@@ -3,3 +3,8 @@ label.mt_label{
     display: block;
     cursor: default;
     }
+span.mt_optional{
+    font-size: 8pt;
+    color: grey;
+    font-style: italic;
+    }
