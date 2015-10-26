@@ -63,8 +63,11 @@ foreach($technicians as $person){
 ?>
 
 <input type="checkbox" name="save" style="display: none;" checked="checked">
-<?php submit_button(); ?>
+<?php submit_button(); 
+$page = get_page_by_title('Meet The Technicians');
+?>
 </form>
+<a href="<?= get_page_link($page->ID) ?>" class="mt_viewpage">View Page</a>
 </div>
 
 <?php
