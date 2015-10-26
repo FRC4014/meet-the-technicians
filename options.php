@@ -24,9 +24,11 @@ if (isset($_POST["save"])){ //save POST data to database
 
 <?php
 
-$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", OBJECT );
+$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", ARRAY_A );
+print_r($technicians);
+
 foreach($technicians as $person){
-	echo '<fieldset class="mt_person"><legend>' . $person->name . '</legend>' . "\n";
+	echo '<fieldset class="mt_person"><legend>' . $person[name] . '</legend>' . "\n";
 	$fields = array( //array(display label, max length (see database), is required, width, size)
 		name => array("Name", 30, true, 30),  
 		grade => array("Grade", 2, true, 2), 
@@ -39,7 +41,7 @@ foreach($technicians as $person){
 			);
 	
 	foreach ($fields as $attribute => $info){
-		$id = 'mt_' . $person->id . "_" . $attribute;
+		$id = 'mt_' . $person[id] . "_" . $attribute;
 		echo '<div class="mt_field"><label class="mt_label">' . $info[0];
 		if (!$info[2]) { //isn't required field
 			echo ' <span class="mt_optional">optional</span>';
@@ -48,14 +50,14 @@ foreach($technicians as $person){
 		
 		if ($attribute == "description"){ //for longer (paragraph) fields
 			echo '<textarea name="' . $id . '">';
-			echo $person->$attribute;
+			echo $person[$attribute];
 			echo '</textarea>'  . '</label>'. "\n";
 			}
 		else {
 			if ($attribute == "grade" or $attribute == "years") $size = 2;
 			else $size = 30;
 			echo '<input type="text" name="' . $id . 
-					'" value="' . $person->$attribute . 
+					'" value="' . $person[$attribute] . 
 					'" maxlength = "' . $info[1] .
 					'" size = "' . $size .
 					'"/></div>' . "\n";
