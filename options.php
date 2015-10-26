@@ -40,10 +40,12 @@ foreach($technicians as $person){
 	
 	foreach ($fields as $attribute => $info){
 		$id = 'mt_' . $person->id . "_" . $attribute;
-		echo '<div class="mt_field"><label class="mt_label">' . $info[0] . '</label>';
+		echo '<div class="mt_field"><label class="mt_label">' . $info[0];
 		if (!$info[2]) { //isn't required field
 			echo ' <span class="mt_optional">optional</span>';
 			}
+		echo '</label>';
+		
 		if ($attribute == "description"){ //for longer fields
 			echo '<textarea name="' . $id . '">';
 			echo $person->$attribute;
