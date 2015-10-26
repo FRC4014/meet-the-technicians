@@ -1,4 +1,4 @@
 # Meet the Technicians
-Wordpress plugin that makes a page with a grid of the team members.  Retrieved from a sql database.
+Wordpress plugin that makes a page with a grid of all our team members.  All the data is conveniently stored in a sql database.
 
-Will someday include a cool backend.
+Includes an easy-to use backend.
