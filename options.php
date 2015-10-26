@@ -59,7 +59,7 @@ foreach($technicians as $person){
 					'" id="' . $id . 
 					'" value="' . $person[$attribute] . 
 					'" maxlength = "' . $info[1] .
-					'" size = "30" onfocusout="refreshpic()"/></div>' . "\n";
+					'" size = "30" onfocusout="RefreshPic()"/></div>' . "\n";
 			echo '<img src="' . $person[$attribute] . '" id="mt_' . $person[id] . '_img" width="240px" />';
 			}
 		else {
