@@ -28,7 +28,7 @@ function createTechniciansTable() {
 		grade smallint(2) NOT NULL,
 		years smallint(2) NOT NULL,
 		title varchar(60) NOT NULL,
-		pic varchar(55) NOT NULL,
+		pic varchar(100) NOT NULL,
 		description varchar(200),
 		quote varchar(50),
 		hobbies varchar(50),

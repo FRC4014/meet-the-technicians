@@ -35,7 +35,7 @@ foreach($technicians as $person){
 		grade => array("Grade", 2, true, 2), 
 		years => array("Years on the Team", 2, true, 2), 
 		title => array("Title/Responsibilities", 60, true, 30), 
-		pic => array("URL to Picture", 55, true, 30), 
+		pic => array("URL to Picture", 100, true, 30), 
 		description => array("Description", 200, false), 
 		quote => array("Quote", 50, false, 30), 
 		hobbies => array("Hobbies", 50, false, 30)
@@ -54,10 +54,19 @@ foreach($technicians as $person){
 			echo $person[$attribute];
 			echo '</textarea>'  . '</label>'. "\n";
 			}
+		else if ($attribute =="pic"){
+			echo '<input type="text" name="' . $id .  
+					'" id="' . $id . 
+					'" value="' . $person[$attribute] . 
+					'" maxlength = "' . $info[1] .
+					'" size = "30" onfocusout="refreshpic()"/></div>' . "\n";
+			echo '<img src="' . $person[$attribute] . '" id="mt_' . $person[id] . '_img" width="240px" />';
+			}
 		else {
 			if ($attribute == "grade" or $attribute == "years") $size = 2;
 			else $size = 30;
 			echo '<input type="text" name="' . $id . 
+					'" id="' . $id . 
 					'" value="' . $person[$attribute] . 
 					'" maxlength = "' . $info[1] .
 					'" size = "' . $size .
