@@ -65,11 +65,24 @@ if (isset($_POST["submit"])){ //save POST data to database
 
 <?php
 $technicians = $this->getAll();
-//print_r($technicians); //very useful when testing
-
+array_push($technicians, array(
+	id => "new",
+	name => '',  
+	grade => '', 
+	years => '', 
+	title => '', 
+	pic => '', 
+	description => '', 
+	quote => '', 
+	hobbies => ''
+	));
+print_r($technicians); //very useful when testing
 
 foreach($technicians as $person){
-	echo '<fieldset class="mt_person"><legend>' . $person[name] . '</legend>' . "\n";
+	if ($person[id] == "new"){$legend = "New Person";}
+	else {$legend = $person[name];}
+	echo '<fieldset class="mt_person"><legend>' . $legend . '</legend>' . "\n";
+	
 	$fields = array( //array(display label, max length (see database), is required, width, size)
 		name => array("Name", 30, true, 30),  
 		grade => array("Grade", 2, true, 2), 
@@ -113,7 +126,7 @@ foreach($technicians as $person){
 					'"/></div>' . "\n";
 			}
 		}
-	echo '</fieldset>';
+	echo '</fieldset>' . "\n\n";
 	}
 ?>
 
