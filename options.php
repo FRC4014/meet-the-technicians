@@ -14,6 +14,7 @@ if (isset($_POST["save"])){ //save POST data to database
 		echo $mt_id;
 		}
 	$sql = "INSERT INTO...";
+	notsaved_notice();
 	}
 	
 
