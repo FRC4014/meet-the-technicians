@@ -1,1 +1,5 @@
-//style for backend page
+/*style for backend page*/
+label.mt_label{
+    display: block;
+    cursor: default;
+    }

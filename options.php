@@ -18,7 +18,6 @@ if (isset($_POST["save"])){ //save POST data to database
 	
 
 ?>
-<link rel="stylesheet" type="text/css" href="<?= home_url( '/wp-content/plugins/meet-the-technicians/options.css' ) ?>" media="screen"/>
 <div class="wrap">
 <form method="post" action=""> 
 <h2>Meet The Technicians</h2>
@@ -27,20 +26,22 @@ if (isset($_POST["save"])){ //save POST data to database
 
 $technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY id ASC", OBJECT );
 foreach($technicians as $person){
-	echo '<div id="mt_person">' . $person->name . '</div>';
+	echo '<fieldset class="mt_person"><legend>' . $person->name . '</legend>' . "\n";
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
-		echo '<div id="mt_label">' . $attribute . '</div>';
+		$id = 'mt_' . $person->id . "_" . $attribute;
+		echo '<label class="mt_label">' . $attribute;
 		if ($attribute == "description"){ //for longer fields
-			echo '<textarea name="' . 'mt_' . $person->id . "_" . $attribute . '">';
+			echo '<textarea name="' . $id . '">';
 			echo $person->$attribute;
-			echo '</textarea>' . "\n";
+			echo '</textarea>'  . '</label>'. "\n";
 			}
 		else {
-			echo '<input type="text" name="' . 'mt_' . $person->id . "_" . $attribute . 
+			echo '<input type="text" name="' . $id . 
 					'" value="' . $person->$attribute . 
-					'" />' . "\n";
+					'" />' . '</label>' . "\n";
 			}
 		}
+	echo '</fieldset>';
 	}
 ?>
 

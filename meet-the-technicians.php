@@ -56,10 +56,27 @@ function meet_technicians_options() {
 	require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/options.php");
 	}
 
+function mt_enqueue_admin_style($hook) {
+    if ( 'settings_page_meet-the-technicians' != $hook ) {
+        return;
+		}
+    wp_register_style( 'mt_admin_style', plugin_dir_url( __FILE__ ) . 'options.css' );
+	wp_enqueue_style( 'mt_admin_style' );
+	}
+	
+function mt_enqueue_page_style() {
+    if (get_the_title() != "Meet the Technicians") {
+        return;
+		}
+    wp_register_style( 'mt_page_style', plugin_dir_url( __FILE__ ) . 'page.css' );
+	wp_enqueue_style( 'mt_page_style' );
+	}
+
 if ( $tableversion != get_option( "meettechniciansversion" ) ) createTechniciansTable();
 
-
-add_action( 'admin_menu', 'meet_technicians_menu' );
-add_filter( 'the_content', 'meet_technicians' );
-register_activation_hook( __FILE__, 'createTechniciansTable' );
+add_action('admin_enqueue_scripts', 'mt_enqueue_admin_style');
+add_action('wp_enqueue_scripts', 'mt_enqueue_page_style');
+add_action('admin_menu', 'meet_technicians_menu' );
+add_filter('the_content', 'meet_technicians' );
+register_activation_hook(__FILE__, 'createTechniciansTable' );
 ?>
