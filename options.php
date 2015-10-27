@@ -4,7 +4,6 @@
 global $wpdb;
 $tablename = $this->getTableName();
 if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
-	echo "deleting $_POST[delete]";
 	$succeed = $wpdb->delete($tablename, array('id' => $_POST["delete"]), array('%d'));
 	if ($succeed === 1){ 
 		$this->adminNotice ("Person deleted.");
@@ -28,8 +27,6 @@ else if (isset($_POST["save"])){ //update data
 				strpos($sliver, $mt_id) + strlen($mt_id) + 1 //after _, after id
 				);
 		$data_array[$mt_id][$attribute] = stripslashes($data);
-		
-		//echo "id: $mt_id, attribute: $attribute, data: $data<br>";
 		}
 	$new_array = array();
 	foreach ($data_array as $db_id => $data){
@@ -81,7 +78,6 @@ else if (isset($_POST["save"])){ //update data
 		foreach ($differences as $name => $value){
 			if (gettype($value) == "string") {$datatype = '%s';}
 			else {$datatype = '%d';}
-			//echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
 			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
 			
 			if ($succeed !== false){ //can be successful and return 0
