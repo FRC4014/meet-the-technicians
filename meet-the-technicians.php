@@ -123,14 +123,13 @@ class MeetTechnicians {
 	 * Adds options to settings menu. add_action'd at 'admin_menu'
 	 */
 	function addAdminMenu() {
-		add_options_page( "Meet The Technicians", "Meet The Technicians", 'edit_posts', "meet-the-technicians.php", array ($this, "displayOptions")); 
+		add_pages_page( "Meet The Technicians", "Meet The Technicians", 'edit_posts', "meet-the-technicians.php", array ($this, "displayOptions")); 
 		}
 
 	/**
 	 * Code for options page, called on associated page
 	 */
 	function displayOptions() {
-		echo "<!-- displayOptions running -->";
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/options.php");
 		}
 
@@ -139,7 +138,7 @@ class MeetTechnicians {
 	 * @param string $hook hook data passed by add_action
 	 */
 	function enqueueAdminStyle($hook) {
-		if ( 'settings_page_meet-the-technicians' != $hook ) {
+		if ( 'pages_page_meet-the-technicians' != $hook ) {
 			return;
 			}
 		wp_register_style( 'mt_admin_style', plugin_dir_url( __FILE__ ) . 'options.css' );
@@ -162,7 +161,7 @@ class MeetTechnicians {
 	 * @param string $hook hook data passed by add_action
 	 */
 	function enqueueScript($hook) {
-		if (get_the_title() != "Meet the Technicians" and $hook != 'settings_page_meet-the-technicians') {
+		if (get_the_title() != "Meet the Technicians" and $hook != 'pages_page_meet-the-technicians') {
 			return;
 			}
 		wp_register_script( 'mt_script', plugin_dir_url( __FILE__ ) . 'script.js' );
