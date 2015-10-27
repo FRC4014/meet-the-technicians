@@ -3,7 +3,17 @@
 
 global $wpdb;
 $tablename = $this->getTableName();
-if (isset($_POST["submit"])){ //save POST data to database
+if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
+	echo "deleting $_POST[delete]";
+	$succeed = $wpdb->delete($tablename, array('id' => $_POST["delete"]), array('%d'));
+	if ($succeed === 1){ 
+		$this->adminNotice ("Person deleted.");
+		}
+	else {
+		$this->adminNotice("Person not deleted", "error");
+		}
+	}
+else if (isset($_POST["save"])){ //update data
 	$technicians = $this->getAll();
 	$save_data = $_POST;
 	unset($save_data["submit"]);
@@ -55,6 +65,7 @@ if (isset($_POST["submit"])){ //save POST data to database
 					));
 			if ($succeed !== false){ //can be successful and return 0
 				$this->adminNotice ("New person \"$data[name]\" added!");
+				$newperson = true;
 				}
 			else {
 				$this->adminNotice("Not saved", "error");
@@ -88,7 +99,7 @@ if (isset($_POST["submit"])){ //save POST data to database
 		else if ($thingsChanged === 1){
 			$this->adminNotice ("Saved. One field changed!");
 			}
-		else {
+		else if (!$newperson){
 			$this->adminNotice ("No changes to save.", "error");
 			}
 	}
@@ -165,7 +176,7 @@ foreach($technicians as $person){
 			}
 		}
 	?>
-	<input type="submit" class="button button-primary mt_save mt_person_button" value="Save">
+	<input type="submit" class="button button-primary mt_save mt_person_button" name="save" value="Save">
 	<a class="mt_delete mt_person_button" onclick="formSubmit(<?= $person[id] ?>);">Delete</a>
 	<?php
 	echo '</fieldset>' . "\n\n";
@@ -174,7 +185,7 @@ foreach($technicians as $person){
 <input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
 <p>
-<input type="submit" class="button button-primary" value="Save Changes">
+<input type="submit" name="save" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
 </p>
 </form>

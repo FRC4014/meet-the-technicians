@@ -61,4 +61,5 @@ input.button.button-primary.mt_save {
     }
 a.mt_delete{
     color: red;
+    cursor: pointer;
     }
