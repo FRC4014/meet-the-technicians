@@ -9,7 +9,11 @@ span.mt_optional{
     color: grey;
     font-style: italic;
     }
-
+    
+.mt_field{
+    margin-top: 1px;
+    }
+    
 fieldset.mt_person{
     display: inline-block;
     border: grey 2px solid;
