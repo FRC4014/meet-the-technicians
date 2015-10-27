@@ -179,7 +179,7 @@ foreach($technicians as $person){
 	}
 ?>
 <input type="hidden" name="delete" id="mt_delete" value="-1">
-<a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
+<a onclick="revealNewPerson()"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
 <p>
 <input type="submit" name="save" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
