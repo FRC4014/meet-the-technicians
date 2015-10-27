@@ -3,7 +3,6 @@
 
 global $wpdb;
 $tablename = $this->getTableName();
-
 if (isset($_POST["submit"])){ //save POST data to database
 	$technicians = $this->getAll();
 	$save_data = $_POST;
@@ -97,7 +96,7 @@ if (isset($_POST["submit"])){ //save POST data to database
 
 ?>
 <div class="wrap">
-<form method="post" action=""> 
+<form method="post" action="" id="mt_form"> 
 <h2>Meet The Technicians</h2>
 
 <?php
@@ -165,12 +164,17 @@ foreach($technicians as $person){
 					'"/></div>' . "\n";
 			}
 		}
+	?>
+	<input type="submit" class="button button-primary mt_save mt_person_button" value="Save">
+	<a class="mt_delete mt_person_button" onclick="formSubmit(<?= $person[id] ?>);">Delete</a>
+	<?php
 	echo '</fieldset>' . "\n\n";
 	}
 ?>
+<input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
 <p>
-<input type="submit" name="submit" id="submit" class="button button-primary" value="Save Changes">
+<input type="submit" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
 </p>
 </form>
