@@ -16,6 +16,9 @@ fieldset.mt_person{
     margin: 10px;
     padding: 10px;
     text-align: center;
+    height: 640px;
+    width: 254px;
+    vertical-align: text-bottom; 
     }
 .mt_person legend{
     font-size: 20px;
@@ -28,4 +31,20 @@ fieldset.mt_person{
     margin-top: 5px;
     height: 200px;
     object-fit: cover;
+    }
+#person_new {
+    display: none;
+    }
+    
+#addnew{
+    color:black;
+    cursor: pointer;
+    }
+#addnew #plus{
+    font-size: 200px;
+    height: 50px;
+    margin-top: 250px;
+    }
+#addnew #text{
+    margin-top:30px;
     }
