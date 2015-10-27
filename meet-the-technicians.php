@@ -115,7 +115,7 @@ class MeetTechnicians {
 	 * Adds options to settings menu. add_action'd at 'admin_menu'
 	 */
 	function addAdminMenu() {
-		add_options_page( "Meet The Technicians", "Meet The Technicians", 'manage_options', "meet-the-technicians.php", array ($this, "displayOptions")); 
+		add_options_page( "Meet The Technicians", "Meet The Technicians", 'edit_posts', "meet-the-technicians.php", array ($this, "displayOptions")); 
 		}
 
 	/**
