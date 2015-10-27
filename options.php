@@ -21,40 +21,41 @@ if (isset($_POST["submit"])){ //save POST data to database
 				);
 		$data_array[$mt_id][$attribute] = $data;
 		
-		//echo "id: $mt_id, attribute: $attribute, data: $data<br>";
+		echo "id: $mt_id, attribute: $attribute, data: $data<br>";
 		}
 	$new_array = array();
 	foreach ($data_array as $db_id => $data){
 		$new_array[] = array_merge(array("id" => $db_id), $data);
 		}
 	$thingsChanged = 0;
-	foreach ($new_array as $person => $data){
-		$differences = array_diff($data, $technicians[$person]);
-		//print_r($differences);
-		foreach ($differences as $name => $value){
-			if (gettype($value) == "string") {$datatype = '%s';}
-			else {$datatype = '%d';}
-			//echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
-			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
-			
-			if ($succeed !== false){ //can be successful and return 0
-				$thingsChanged += $succeed;
-				}
-			else {
-				$this->adminNotice("Not saved", "error");
-				break 2;
-				}
-			}
-		if ($thingsChanged > 1){
-			$this->adminNotice ("Saved. $thingsChanged fields changed!");
-			}
-		else if ($thingsChanged === 1){
-			$this->adminNotice ("Saved. One field changed!");
-			}
-		else {
-			$this->adminNotice ("No changes to save.", "error");
-			}
-		}
+	//print_r($new_array);
+//	foreach ($new_array as $person => $data){
+//		$differences = array_diff($data, $technicians[$person]);
+//		//print_r($differences);
+//		foreach ($differences as $name => $value){
+//			if (gettype($value) == "string") {$datatype = '%s';}
+//			else {$datatype = '%d';}
+//			//echo "table: $tablename, data: array($name => $value), which: array(\"id\" => $person), datatype: $datatype, whichtype: %d" ;
+//			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
+//			
+//			if ($succeed !== false){ //can be successful and return 0
+//				$thingsChanged += $succeed;
+//				}
+//			else {
+//				$this->adminNotice("Not saved", "error");
+//				break 2;
+//				}
+//			}
+//		if ($thingsChanged > 1){
+//			$this->adminNotice ("Saved. $thingsChanged fields changed!");
+//			}
+//		else if ($thingsChanged === 1){
+//			$this->adminNotice ("Saved. One field changed!");
+//			}
+//		else {
+//			$this->adminNotice ("No changes to save.", "error");
+//			}
+//		}
 	}
 	
 
@@ -76,7 +77,7 @@ array_push($technicians, array(
 	quote => '', 
 	hobbies => ''
 	));
-print_r($technicians); //very useful when testing
+//print_r($technicians); //very useful when testing
 
 foreach($technicians as $person){
 	if ($person[id] == "new"){$legend = "New Person";}
@@ -112,7 +113,9 @@ foreach($technicians as $person){
 					'" id="' . $id . 
 					'" value="' . $person[$attribute] . 
 					'" maxlength = "' . $info[1] .
-					'" size = "30" onfocusout="RefreshPic()"/></div>' . "\n";
+					'" size = "30" ' .
+					'onfocusout="' . "document.getElementById('mt_$person[id]_img').src = this.value;" .
+					'"/></div>' . "\n";
 			echo '<img src="' . $person[$attribute] . '" id="mt_' . $person[id] . '_img" width="240px" />';
 			}
 		else {
