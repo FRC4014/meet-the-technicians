@@ -5,7 +5,6 @@ global $wpdb;
 $tablename = $this->getTableName();
 
 if (isset($_POST["submit"])){ //save POST data to database
-	//print_r($_POST); //very useful when testing
 	$technicians = $this->getAll();
 	$save_data = $_POST;
 	unset($save_data["submit"]);
@@ -42,7 +41,6 @@ if (isset($_POST["submit"])){ //save POST data to database
 				}
 		if ($db_id == "new"){
 			$db_id = $last_id + 1; //should be in order of id, so last one will be greatest
-			print_r($data);
 			$succeed = $wpdb -> insert($tablename, 
 					array_merge(array("id" => $db_id), $data), 
 					array(
@@ -68,10 +66,8 @@ if (isset($_POST["submit"])){ //save POST data to database
 		$new_array[] = array_merge(array("id" => $db_id), $data);
 		}
 	$thingsChanged = 0;
-	print_r($new_array);
 	foreach ($new_array as $person => $data){
 		$differences = array_diff($data, $technicians[$person]);
-		//print_r($differences);
 		foreach ($differences as $name => $value){
 			if (gettype($value) == "string") {$datatype = '%s';}
 			else {$datatype = '%d';}
@@ -117,7 +113,6 @@ array_push($technicians, array(
 	quote => '', 
 	hobbies => ''
 	));
-//print_r($technicians); //very useful when testing
 
 foreach($technicians as $person){
 	if ($person[id] == "new"){$legend = "New Person";}
