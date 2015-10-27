@@ -18,7 +18,7 @@ if (isset($_POST["submit"])){ //save POST data to database
 		$attribute = substr($sliver, 
 				strpos($sliver, $mt_id) + strlen($mt_id) + 1 //after _, after id
 				);
-		$data_array[$mt_id][$attribute] = $data;
+		$data_array[$mt_id][$attribute] = stripslashes($data);
 		
 		//echo "id: $mt_id, attribute: $attribute, data: $data<br>";
 		}
