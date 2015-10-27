@@ -25,7 +25,6 @@ class MeetTechnicians {
 	 * Updates table, if nessesary
 	 */
 	function __construct() {
-		echo "<!-- __construct running -->";
 		if ($this->tableVersion != get_option( "meettechniciansversion" )){
 			$this->createTable(); //updates if new tableversion 
 			}
