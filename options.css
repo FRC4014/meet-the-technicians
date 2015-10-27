@@ -2,9 +2,30 @@
 label.mt_label{
     display: block;
     cursor: default;
+    text-align: left;
     }
 span.mt_optional{
     font-size: 8pt;
     color: grey;
     font-style: italic;
+    }
+
+fieldset.mt_person{
+    display: inline-block;
+    border: grey 2px solid;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+    }
+.mt_person legend{
+    font-size: 20px;
+    }
+.mt_person input, textarea, img{
+    width: 250px;
+    }
+.mt_person img{
+    border: 2px solid #ddd;
+    margin-top: 5px;
+    height: 200px;
+    object-fit: cover;
     }
