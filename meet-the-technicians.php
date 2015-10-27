@@ -25,6 +25,14 @@ class MeetTechnicians {
 	 * Updates table, if nessesary
 	 */
 	function __construct() {
+		add_action('admin_menu', array($this, 'addAdminMenu'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
+		add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
+		add_action('wp_enqueue_scripts', array($this, 'enqueueScript'));
+		add_filter('the_content', array($this, 'pageFilter'));
+		
+		register_activation_hook(__FILE__, array($this, 'createTable'));
 		if ($this->tableVersion != get_option( "meettechniciansversion" )){
 			$this->createTable(); //updates if new tableversion 
 			}
@@ -45,7 +53,8 @@ class MeetTechnicians {
 		}
 
 	/**
-	 * Creates or updates SQL table.
+	 * Creates or updates SQL table.  Is run on plugin activation and when the
+	 * table needs updating (from constructor).
 	 * 
 	 * @global class $wpdb wordpress database manager
 	 */
@@ -162,12 +171,4 @@ class MeetTechnicians {
 	} //end class
 
 $meettechnicians = new MeetTechnicians();
-
-add_action('admin_enqueue_scripts', array($meettechnicians, 'enqueueAdminStyle'));
-add_action('wp_enqueue_scripts', array($meettechnicians, 'enqueuePageStyle'));
-add_action('admin_enqueue_scripts', array($meettechnicians, 'enqueueScript'));
-add_action('wp_enqueue_scripts', array($meettechnicians, 'enqueueScript'));
-add_action('admin_menu', array($meettechnicians, 'addAdminMenu'));
-add_filter('the_content', array($meettechnicians, 'pageFilter'));
-register_activation_hook(__FILE__, array($meettechnicians, 'createTable'));
 ?>
