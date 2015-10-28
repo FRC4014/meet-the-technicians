@@ -106,6 +106,7 @@ else if (isset($_POST["save"])){ //update data
 <form method="post" action="" id="mt_form"> 
 <h2>Meet The Technicians</h2>
 
+<div id="mt_input_container">
 <?php
 $technicians = $this->getAll();
 array_push($technicians, array(
@@ -148,7 +149,7 @@ foreach($technicians as $person){
 		if ($attribute == "description"){ //for longer (paragraph) fields
 			echo '<textarea name="' . $id . '">';
 			echo $person[$attribute];
-			echo '</textarea>'  . '</label>'. "\n";
+			echo '</textarea>'  . '</div>'. "\n";
 			}
 		else if ($attribute =="pic"){
 			echo '<input type="text" name="' . $id .  
@@ -184,7 +185,7 @@ foreach($technicians as $person){
 <input type="submit" name="save" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
 </p>
-</form>
 <?php $page = get_page_by_title('Meet The Technicians'); ?>
-<a href="<?= get_page_link($page->ID) ?>" class="mt_viewpage">View Page</a>
+</div>
+</form>
 </div>

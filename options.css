@@ -66,3 +66,17 @@ a.mt_delete{
     color: red;
     cursor: pointer;
     }
+#mt_input_container{
+    text-align: left;
+    }
+@media (max-width: 1000px) {
+    #mt_input_container{
+        text-align: center;
+        }
+    fieldset.mt_person{
+        height: 750px;
+        }
+    input.button.button-primary.mt_save {
+        width: 75px;
+        }
+    }
