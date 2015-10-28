@@ -10,8 +10,9 @@ function revealNewPerson (){
     document.getElementById('addnew').style.display = 'none';
     }
 
-var body = document.getElementsByTagName("body")[0];
-window.addEventListener("load", redirectPage, false);
+if (document.getElementById('title') !== null){
+    window.addEventListener("load", redirectPage, false);
+    }
 
 function redirectPage(){
     if (document.getElementById('title').value === 'Meet the Technicians') {
