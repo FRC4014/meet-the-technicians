@@ -10,12 +10,13 @@ function revealNewPerson (){
     document.getElementById('addnew').style.display = 'none';
     }
 
-if (document.getElementById('title') !== null){
-    window.addEventListener("load", redirectPage, false);
-    }
+window.addEventListener("DOMContentLoaded", redirectPage, false);
 
 function redirectPage(){
-    if (document.getElementById('title').value === 'Meet the Technicians') {
+    if (document.getElementById('title') === null){
+        return;
+        }
+    else if (document.getElementById('title').value === 'Meet the Technicians') {
         window.location = "edit.php?post_type=page&page=meet-the-technicians.php";
         }
     }
