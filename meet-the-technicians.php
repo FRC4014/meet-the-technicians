@@ -44,6 +44,7 @@ class MeetTechnicians {
 	 * 
 	 * @param string $the_content the input from the_content, insde the_loop
 	 * @return string $the_content filtered input, technicians content if applicable
+	 * @global object $wpdb wordpress database manager
 	 */
 	function pageFilter($the_content) {
 		if (get_the_title() == "Meet the Technicians"){
@@ -56,7 +57,7 @@ class MeetTechnicians {
 	 * Creates or updates SQL table.  Is run on plugin activation and when the
 	 * table needs updating (from constructor).
 	 * 
-	 * @global class $wpdb wordpress database manager
+	 * @global object $wpdb wordpress database manager
 	 */
 	function createTable() {
 		global $wpdb;
@@ -91,6 +92,8 @@ class MeetTechnicians {
 		
 	/**
 	 * @return array all the data from the database sorted by id
+	 * 
+	 * @global object $wpdb wordpress database manager
 	 */
 	private function getAll() {
 		global $wpdb;
@@ -128,6 +131,8 @@ class MeetTechnicians {
 
 	/**
 	 * Code for options page, called on associated page
+	 * 
+	 * @global object $wpdb wordpress database manager
 	 */
 	function displayOptions() {
 		require_once(ABSPATH . "wp-content/plugins/meet-the-technicians/options.php");
