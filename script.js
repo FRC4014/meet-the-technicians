@@ -16,7 +16,7 @@ function redirectPage(){
     if (document.getElementById('title') === null){
         return;
         }
-    else if (document.getElementById('title').value === 'Meet the Technicians') {
-        window.location = "edit.php?post_type=page&page=meet-the-technicians.php";
+    else if (document.getElementById('title').value === pageName) {
+        window.location = "edit.php?post_type=page&page=" + redirectName;
         }
     }

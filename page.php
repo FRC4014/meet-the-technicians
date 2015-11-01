@@ -1,12 +1,10 @@
 <?php //file to output to the page using $the_content.  Included in meet-the-technicians.php.
 
-global $wpdb;
-$tablename = $wpdb->prefix . "meettechnicians";
-$technicians = $wpdb->get_results( "SELECT * FROM $tablename ORDER BY ID", OBJECT );
+$people = $this->getAll();
 $the_content = "";
-shuffle($technicians); //randomize order
+shuffle($people); //randomize order
 
-foreach($technicians as $person){
+foreach($people as $person){
 	$the_content .=  '<div class="mt_person">' . $person->name . '</div>';
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
 		$the_content .=  '<div id="mt_label_">' . $attribute . '</div>';

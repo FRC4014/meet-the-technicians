@@ -1,10 +1,10 @@
 <?php
 //this file will be require_once'd for the options page.
 
+//UPDATE DATABASE
 global $wpdb;
-$tablename = $this->getTableName();
 if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
-	$succeed = $wpdb->delete($tablename, array('id' => $_POST["delete"]), array('%d'));
+	$succeed = $wpdb->delete($this->tableName, array('id' => $_POST["delete"]), array('%d'));
 	if ($succeed === 1){ 
 		$this->adminNotice ("Person deleted.");
 		}
@@ -47,7 +47,7 @@ else if (isset($_POST["save"])){ //update data
 				}
 		if ($db_id == "new"){
 			$db_id = $last_id + 1; //should be in order of id, so last one will be greatest
-			$succeed = $wpdb -> insert($tablename, 
+			$succeed = $wpdb -> insert($this->tableName, 
 					array_merge(array("id" => $db_id), $data), 
 					array(
 					'%d', //id
@@ -78,7 +78,7 @@ else if (isset($_POST["save"])){ //update data
 		foreach ($differences as $name => $value){
 			if (gettype($value) == "string") {$datatype = '%s';}
 			else {$datatype = '%d';}
-			$succeed = $wpdb -> update($tablename, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
+			$succeed = $wpdb -> update($this->tableName, array($name => $value), array("id" => $data["id"]), $datatype, "%d");
 			
 			if ($succeed !== false){ //can be successful and return 0
 				$thingsChanged += $succeed;
@@ -99,15 +99,15 @@ else if (isset($_POST["save"])){ //update data
 			$this->adminNotice ("No changes to save.", "error");
 			}
 	}
-	
-
+//END UPADATE DATABASE
 ?>
 <div class="wrap">
 <form method="post" action="" id="mt_form"> 
-<h2>Meet The Technicians</h2>
+<h2><?= $this->featureName ?></h2>
 
 <div id="mt_input_container">
 <?php
+//RETRIEVE FROM DATABASE
 $technicians = $this->getAll();
 array_push($technicians, array(
 	id => "new",
@@ -178,6 +178,7 @@ foreach($technicians as $person){
 	<?php
 	echo '</fieldset>' . "\n\n";
 	}
+//END RETRIEVE
 ?>
 <input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
@@ -185,7 +186,7 @@ foreach($technicians as $person){
 <input type="submit" name="save" class="button button-primary" value="Save Changes">
 <input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
 </p>
-<?php $page = get_page_by_title('Meet The Technicians'); ?>
+<?php $page = get_page_by_title($this->featureName); ?>
 </div>
 </form>
 </div>
