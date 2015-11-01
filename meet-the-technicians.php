@@ -19,7 +19,7 @@ class MeetTechnicians {
 	 * @var string arbitrary version number for the table.  when this changes, 
 	 * the table is refreshed
 	 */
-	private $tableVersion = "20";
+	private $tableVersion = "27";
 	
 	/**
 	 * Updates table, if nessesary
@@ -33,7 +33,7 @@ class MeetTechnicians {
 		add_filter('the_content', array($this, 'pageFilter'));
 		
 		register_activation_hook(__FILE__, array($this, 'createTable'));
-		if ($this->tableVersion != get_option( "meettechniciansversion" )){
+		if ($this->tableVersion != get_option("meettechniciansversion")){
 			$this->createTable(); //updates if new tableversion 
 			}
 		}
@@ -80,7 +80,7 @@ class MeetTechnicians {
 
 		dbDelta( $sql );
 		update_option( 'meettechniciansversion', $this->tableVersion );
-		add_action( 'admin_notices', 'MeetTechnicians -> tableUpdatedNotice' );
+		add_action( 'admin_notices', array($this, 'tableUpdatedNotice'));
 		}
 	
 	/**
@@ -102,10 +102,10 @@ class MeetTechnicians {
 		}
 		
 	/**
-	 * Makes admin notice about table updating.
+	 * Makes admin notice about table updating using adminNotice
 	 */
 	function tableUpdatedNotice() {
-		admin_notice("Meet the Technicians: Table updated to version $this->tableversion");
+		$this->adminNotice("Meet the Technicians: Table updated to version $this->tableVersion");
 		}
 
 	/**
