@@ -61,7 +61,7 @@ else if (isset($_POST["save"])){ //update data
 					'%s'  //hobbies
 					));
 			if ($succeed !== false){ //can be successful and return 0
-				$this->adminNotice ("New person \"$data[name]\" added!");
+				$this->adminNotice ('New person "' . esc_attr($data[name]) . '" added!');
 				$newperson = true;
 				}
 			else {
@@ -125,7 +125,7 @@ foreach($technicians as $person){
 	if ($person[id] == "new"){$legend = "New Person";}
 	else {$legend = $person[name];}
 	echo '<fieldset class="mt_person" id="person_' . $person[id] .
-			'"><legend>' . $legend . '</legend>' . "\n";
+			'"><legend>' . esc_attr($legend) . '</legend>' . "\n";
 	
 	$fields = array( //array(display label, max length (see database), is required, width, size)
 		name => array("Name", 30, true, 30),  
@@ -148,13 +148,13 @@ foreach($technicians as $person){
 		
 		if ($attribute == "description"){ //for longer (paragraph) fields
 			echo '<textarea name="' . $id . '">';
-			echo $person[$attribute];
+			echo esc_attr($person[$attribute]);
 			echo '</textarea>'  . '</div>'. "\n";
 			}
 		else if ($attribute =="pic"){
 			echo '<input type="text" name="' . $id .  
 					'" id="' . $id . 
-					'" value="' . $person[$attribute] . 
+					'" value="' . esc_attr($person[$attribute]) . 
 					'" maxlength = "' . $info[1] .
 					'" size = "30" ' .
 					'onfocusout="' . "document.getElementById('mt_$person[id]_img').src = this.value;" .
@@ -166,7 +166,7 @@ foreach($technicians as $person){
 			else $size = 30;
 			echo '<input type="text" name="' . $id . 
 					'" id="' . $id . 
-					'" value="' . $person[$attribute] . 
+					'" value="' . esc_attr($person[$attribute]) . 
 					'" maxlength = "' . $info[1] .
 					'" size = "' . $size .
 					'"/></div>' . "\n";
