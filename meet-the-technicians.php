@@ -60,12 +60,12 @@ class MeetTechnicians {
 		add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
 		add_action('wp_enqueue_scripts', array($this, 'enqueueScript'));
 		add_filter('the_content', array($this, 'pageFilter'));
+		register_activation_hook(__FILE__, array($this, 'activate'));
 		
 		$this->featureName = $featureName;
 		$this->tableSuffixName = $tableSuffixName;
 		$this->tableName = $wpdb->prefix . $this->tableSuffixName;
 		
-		register_activation_hook(__FILE__, array($this, 'createTable'));
 		if ($this->tableVersion != get_option($this->tableSuffixName . "version")){
 			$this->createTable(); //updates if new tableversion 
 			}
@@ -197,6 +197,16 @@ class MeetTechnicians {
 		wp_register_script( 'mt_script', plugin_dir_url( __FILE__ ) . 'script.js' );
 		wp_enqueue_script( 'mt_script' );
 		}
+	
+	/** 
+	 * To be run when the program is first activated.  Runs createTable, and 
+	 * initializes wordpress options for the page name and table suffix.
+	 */
+	function activate() {
+		$this->createTable();
+		add_option("MTfeaturename", "Meet the Technicians");
+		add_option("MTtablesuffix", "meettechnicians");
+	}
 		
 	/**
 	 * Defines variables in javascript to be used in script.js. To be add 
