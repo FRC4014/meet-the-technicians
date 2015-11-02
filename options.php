@@ -3,6 +3,8 @@
 
 //UPDATE DATABASE
 global $wpdb;
+$thingsChanged = 0;
+
 if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
 	$succeed = $wpdb->delete($this->tableName, array('id' => $_POST["delete"]), array('%d'));
 	if ($succeed === 1){ 
@@ -72,7 +74,6 @@ else if (isset($_POST["save"])){ //update data
 		$last_id = $db_id;
 		$new_array[] = array_merge(array("id" => $db_id), $data);
 		}
-	$thingsChanged = 0;
 	foreach ($new_array as $person => $data){
 		$differences = array_diff($data, $technicians[$person]);
 		foreach ($differences as $name => $value){
@@ -89,16 +90,33 @@ else if (isset($_POST["save"])){ //update data
 				}
 			}
 		}
-	if ($thingsChanged > 1){
-			$this->adminNotice ("Saved. $thingsChanged fields changed!");
-			}
-		else if ($thingsChanged === 1){
-			$this->adminNotice ("Saved. One field changed!");
-			}
-		else if (!$newperson){
-			$this->adminNotice ("No changes to save.", "error");
-			}
 	}
+if (isset($_POST["MTfeaturename"]) and $_POST["MTfeaturename"] != get_option("MTfeaturename")){
+	if ($_POST["MTfeaturename"] != "") {
+		update_option("MTfeaturename", $_POST["MTfeaturename"]);
+		$this->featureName = $_POST["MTfeaturename"];
+		$this->adminNotice ("Page name saved!");
+		}
+	else
+		$this->adminNotice ("Invalid page name", "error");
+	}
+if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MTtablesuffix")){
+	if ($_POST["MTfeaturename"] != "") {
+		update_option("MTtablesuffix", $_POST["MTtablesuffix"]);
+		$this->tableSuffix = $_POST["MTtablesuffix"];
+		$this->adminNotice ("Database name saved! (note: old data still stored in old database");
+		}
+	else
+		$this->adminNotice ("Invalid short name", "error");
+	}
+	
+	
+if ($thingsChanged > 1){
+		$this->adminNotice ("Saved. $thingsChanged fields changed!");
+		}
+	else if ($thingsChanged === 1){
+		$this->adminNotice ("Saved. One field changed!");
+		}
 //END UPADATE DATABASE
 ?>
 <div class="wrap">
@@ -182,10 +200,18 @@ foreach($technicians as $person){
 ?>
 <input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
-<p>
-<input type="submit" name="save" class="button button-primary" value="Save Changes">
-<input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
-</p>
+<div id="bottom_buttons">
+	<div id="mt_form_buttons">
+		<input type="submit" name="save" class="button button-primary" value="Save Changes">
+		<input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
+	</div>
+	<div id="mt_general">
+		<label for="MTfeaturename">Page Name:</label>
+		<input type="text" name="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
+		<label for="MTtablesuffix">Database Name:</label>
+		<input type="text" name="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
+	</div>
+</div>
 <?php $page = get_page_by_title($this->featureName); ?>
 </div>
 </form>

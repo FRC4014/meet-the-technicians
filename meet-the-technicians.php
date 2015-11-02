@@ -223,6 +223,12 @@ class MeetTechnicians {
 	} //end class
 	
 	
+if (get_option("MTfeaturename") !== false && get_option("MTtablesuffix") !== false){
+	//wordpress options are defined (as they should be, per install)
+	$meettechnicians = new MeetTechnicians(get_option("MTfeaturename"), get_option("MTtablesuffix"));
+	}
+else {
+	$meettechnicians = new MeetTechnicians();
+	}
 
-$meettechnicians = new MeetTechnicians("Meet the Technicians", "meettechnicians");
 ?>
