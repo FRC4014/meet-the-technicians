@@ -75,7 +75,7 @@ a.mt_delete{
 
 div#bottom_buttons{ /*container div*/
     vertical-align: middle;
-    border: solid grey 2px;
+    /*border: solid grey 2px;*/
     padding: 5px;
     overflow: hidden;
     }
@@ -111,7 +111,7 @@ div#mt_general div{
         margin-top: 20px;
         display: inline-block;
         float: none;
-        border: solid grey 2px;
+        /*border: solid grey 2px;*/
         width: 300px;
         padding: 10px;
         }
