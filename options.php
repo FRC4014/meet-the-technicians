@@ -4,6 +4,7 @@
 //UPDATE DATABASE
 global $wpdb;
 $thingsChanged = 0;
+$page = get_page_by_title($this->featureName);
 
 if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
 	$succeed = $wpdb->delete($this->tableName, array('id' => $_POST["delete"]), array('%d'));
@@ -110,7 +111,15 @@ if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MT
 		$this->adminNotice ("Invalid short name", "error");
 	}
 	
-	
+$status = $wpdb->get_results( "SELECT post_status FROM " . $wpdb->prefix . 
+		"posts WHERE id='" . $page->ID . "'", ARRAY_A );
+$status = $status[0][post_status];
+if (isset($_POST["MTstatus"]) and $_POST["MTstatus"] != $status) {
+	$wpdb->update( $wpdb->posts, array( 'post_status' => $_POST["MTstatus"] ), array( 'ID' => $page->ID ));
+	$this->adminNotice ("Post status saved!");
+	$status = $_POST["MTstatus"];
+	}
+
 if ($thingsChanged > 1){
 		$this->adminNotice ("Saved. $thingsChanged fields changed!");
 		}
@@ -197,8 +206,6 @@ foreach($technicians as $person){
 	echo '</fieldset>' . "\n\n";
 	}
 //END RETRIEVE
-	
-$page = get_page_by_title($this->featureName);
 ?>
 <input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
@@ -208,15 +215,25 @@ $page = get_page_by_title($this->featureName);
 		<input type="reset" name="reset" id="reset" class="button button-secondary" value="Reset">
 	</div>
 	<div id="mt_general">
-		<label for="MTfeaturename">Page Name:</label>
-		<input type="text" name="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
-		<label for="MTtablesuffix">Database Name:</label>
-		<input type="text" name="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
-		<select name="MTstatus">
-			<option value="published">Published</option> 
-			<option value="draft" selected>Private</option>
-		</select>
-		<a href="<?= get_page_link($page->ID) ?>">View page</a>
+		<div>
+			<label for="MTfeaturename">Page Name:</label>
+			<input type="text" name="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
+		</div>
+		<div>
+			<label for="MTtablesuffix">Database Name:</label>
+			<input type="text" name="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
+		</div>
+		<div>
+			<select name="MTstatus">
+				<option value="publish"<?php
+				if ($status == "publish") echo " selected"
+				?>>Published</option> 
+				<option value="draft"<?php
+				if ($status == "draft") echo " selected"
+				?>>Private</option>
+			</select>
+			<a href="<?= get_page_link($page->ID) ?>">View page</a>
+		</div>
 	</div>
 </div>
 </div>

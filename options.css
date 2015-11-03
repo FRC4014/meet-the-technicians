@@ -73,22 +73,25 @@ a.mt_delete{
     text-align: left;
     }
 
-div#bottom_buttons{
+div#bottom_buttons{ /*container div*/
     vertical-align: middle;
     border: solid grey 2px;
     padding: 5px;
-    height: 30px;
+    overflow: hidden;
     }
 div#mt_form_buttons{
     vertical-align: middle;
-    display: inline-block;
+    display: block;
     float: left;
     }
 div#mt_general {
     vertical-align: middle;
-    display: inline-block;
+    display: block;
     float: right;
     margin-left:30px;
+    }
+div#mt_general div{
+    display: inline-block;
     }
 #mt_general label{
     vertical-align: middle;
@@ -97,7 +100,7 @@ div#mt_general {
     vertical-align: middle;
     }
     
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     #mt_input_container{
         text-align: center;
         }
@@ -105,11 +108,20 @@ div#mt_general {
         width: 75px;
         }
     div#mt_general {
-        display:none;
+        margin-top: 20px;
+        display: inline-block;
+        float: none;
+        border: solid grey 2px;
+        width: 300px;
+        padding: 10px;
+        }
+    div#mt_general div{
+        display: block;
         }
     div#bottom_buttons{
-        border:none;
+        margin-top: 20px;
         text-align: center;
+        border: none;
         }
     div#mt_form_buttons{
         float: none;
