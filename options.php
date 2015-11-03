@@ -197,6 +197,8 @@ foreach($technicians as $person){
 	echo '</fieldset>' . "\n\n";
 	}
 //END RETRIEVE
+	
+$page = get_page_by_title($this->featureName);
 ?>
 <input type="hidden" name="delete" id="mt_delete" value="-1">
 <a onclick="document.getElementById('person_new').style.display = 'inline-block';document.getElementById('addnew').style.display = 'none';"><fieldset class="mt_person" id="addnew"><div id="plus">+</div><div id="text">add new person</div></fieldset></a>
@@ -210,9 +212,13 @@ foreach($technicians as $person){
 		<input type="text" name="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
 		<label for="MTtablesuffix">Database Name:</label>
 		<input type="text" name="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
+		<select name="MTstatus">
+			<option value="published">Published</option> 
+			<option value="draft" selected>Private</option>
+		</select>
+		<a href="<?= get_page_link($page->ID) ?>">View page</a>
 	</div>
 </div>
-<?php $page = get_page_by_title($this->featureName); ?>
 </div>
 </form>
 </div>
