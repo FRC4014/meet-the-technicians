@@ -129,7 +129,7 @@ if ($thingsChanged > 1){
 //END UPADATE DATABASE
 ?>
 <div class="wrap">
-<form method="post" action="" id="mt_form"> 
+<form method="post" action="" id="mt_form" autocomplete="off"> 
 <h2><?= $this->featureName ?></h2>
 
 <div id="mt_input_container">
