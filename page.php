@@ -5,12 +5,12 @@ $the_content = "";
 shuffle($people); //randomize order
 
 foreach($people as $person){
-	$the_content .=  '<div class="mt_person">' . $person->name . '</div>';
+	$the_content .=  '<div class="mt_person">' . $person[name] . '</div>';
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
+		if ($person[$attribute] == "") continue;
 		$the_content .=  '<div id="mt_label_">' . $attribute . '</div>';
-		
-		$the_content .=  '<div id="' . 'mt_' . $person->id . "_" . $attribute . '">' .
-					$person->$attribute . 
+		$the_content .=  '<div id="' . 'mt_' . $person[id] . "_" . $attribute . '">' .
+					$person[$attribute] . 
 					'</div>' . "\n";
 		
 		}
