@@ -10,8 +10,17 @@ function revealNewPerson (){
     document.getElementById('addnew').style.display = 'none';
     }
 
-window.addEventListener("DOMContentLoaded", redirectPage, false);
 
+window.addEventListener("DOMContentLoaded", redirectPage, false);
+window.addEventListener("DOMContentLoaded", registerHelper, false);
+
+function registerHelper(){
+    var pageInput = document.getElementById('MTfeaturename');
+    if (pageInput !== null){
+        console.log('event listener registered');
+        pageInput.addEventListener("input", tableSuffixHelper, false);
+        }
+    }
 function redirectPage(){
     if (document.getElementById('title') === null){
         return;
@@ -19,4 +28,12 @@ function redirectPage(){
     else if (document.getElementById('title').value === pageName) {
         window.location = "edit.php?post_type=page&page=" + redirectName;
         }
+    }
+    
+function tableSuffixHelper(){
+    var pageInput = document.getElementById('MTfeaturename');
+    var suffixInput = document.getElementById('MTtablesuffix');
+    var parsedPage = pageInput.value.toLowerCase().replace(/\s/g, '').replace(/the/i, '');
+    suffixInput.value = parsedPage;
+    console.log('name changed');
     }

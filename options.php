@@ -105,7 +105,7 @@ if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MT
 	if ($_POST["MTfeaturename"] != "") {
 		update_option("MTtablesuffix", $_POST["MTtablesuffix"]);
 		$this->tableSuffix = $_POST["MTtablesuffix"];
-		$this->adminNotice ("Database name saved! (note: old data still stored in old database");
+		$this->adminNotice ("Database name saved! (note: old data still stored in old database)");
 		}
 	else
 		$this->adminNotice ("Invalid short name", "error");
@@ -217,11 +217,11 @@ foreach($technicians as $person){
 	<div id="mt_general">
 		<div>
 			<label for="MTfeaturename">Page Name:</label>
-			<input type="text" name="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
+			<input type="text" name="MTfeaturename" id="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
 		</div>
 		<div>
 			<label for="MTtablesuffix">Database Name:</label>
-			<input type="text" name="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
+			<input type="text" name="MTtablesuffix" id="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
 		</div>
 		<div>
 			<select name="MTstatus">
