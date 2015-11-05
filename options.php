@@ -232,7 +232,10 @@ foreach($technicians as $person){
 				if ($status == "draft") echo " selected"
 				?>>Private</option>
 			</select>
-			<a href="<?= get_page_link($page->ID) ?>">View page</a>
+			<?php if ($this->pageExists()) {
+				echo '<a href="' . get_page_link($page->ID)  . '">View page</a>';
+				}
+			?>
 		</div>
 	</div>
 </div>
