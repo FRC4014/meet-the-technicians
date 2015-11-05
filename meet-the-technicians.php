@@ -53,22 +53,29 @@ class MeetTechnicians {
 			$tableSuffixName = "meettechnicians") {
 		global $wpdb;
 		
-		add_action('admin_menu', array($this, 'addAdminMenu'));
-		add_filter('admin_head', array($this, 'initializeJavascript'));
-		add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
-		add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
-		add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
+		$this->featureName = $featureName;
+		$this->tableSuffixName = $tableSuffixName;
+		$this->tableName = $wpdb->prefix . $this->tableSuffixName;
+		add_action( 'admin_notices', array($this, 'makePage'));
+		
+		if (is_admin()){
+			add_action('admin_menu', array($this, 'addAdminMenu'));
+			add_filter('admin_head', array($this, 'initializeJavascript'));
+			add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
+			add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
+			add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
+			
+			if ($this->tableVersion != get_option($this->tableSuffixName . "version")){
+				$this->createTable(); //updates if new tableversion 
+				}
+			if (!$this->pageExists()){
+				add_action( 'admin_notices', array($this, 'makePage'));
+				}
+			}
 		add_action('wp_enqueue_scripts', array($this, 'enqueueScript'));
 		add_filter('the_content', array($this, 'pageFilter'));
 		register_activation_hook(__FILE__, array($this, 'activate'));
 		
-		$this->featureName = $featureName;
-		$this->tableSuffixName = $tableSuffixName;
-		$this->tableName = $wpdb->prefix . $this->tableSuffixName;
-		
-		if ($this->tableVersion != get_option($this->tableSuffixName . "version")){
-			$this->createTable(); //updates if new tableversion 
-			}
 		}
 	
 	/**
@@ -117,13 +124,48 @@ class MeetTechnicians {
 		
 	/**
 	 * @return array all the data from the database sorted by id
-	 * 
 	 * @global object $wpdb wordpress database manager
 	 */
 	private function getAll() {
 		global $wpdb;
 		$results = $wpdb->get_results( "SELECT * FROM $this->tableName ORDER BY id ASC", ARRAY_A );
 		return $results;
+		}
+	
+	/**
+	 * @return boolean whether a page with the featureName title exists in 
+	 * wordpress
+	 */
+	private function pageExists() {
+		return (get_page_by_title($this->featureName) != false);
+		}
+	
+	function makePage() {
+		if ($this->pageExists()) {
+			return false;
+			}
+		$p = array();
+        $p['post_title'] = $this->featureName;
+        $p['post_content'] = '<h2 style="text-align: center;">This page is for the ' . $this->featureName . ' feature.  You should be automatically redirected to correct editor.</h2>
+<p style="text-align: center;">If this text shows up on the webpage, either the plugin is disabled or has some problems.</p>';
+        $p['post_status'] = 'draft';
+        $p['post_type'] = 'page';
+        $p['comment_status'] = 'closed';
+        $p['ping_status'] = 'closed';
+        $p['post_category'] = array(1); // the default 'Uncategorized'
+
+        // Insert the post into the database
+        $this->pageId = wp_insert_post( $p );
+		if ($this->pageId === false) {
+			if (is_wp_error($this->pageId)) {
+				$error_string = $this->pageId->get_error_message();
+				}
+			$this->adminNotice("Page \"" . $this->featureName . "\" not created." . $error_string, "error");
+			}
+		else {
+			$this->adminNotice("Page \"" . $this->featureName . "\" created! Change the name in the page settings.");
+			}
+		
 		}
 		
 	/**
@@ -135,7 +177,6 @@ class MeetTechnicians {
 
 	/**
 	 * Echos the notice in the admin area.  
-	 * 
 	 * @param string $notice message to send to user
 	 * @param string $class type of notice. "updated", "error"
 	 */
