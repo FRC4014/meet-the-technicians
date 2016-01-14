@@ -89,7 +89,6 @@ class MeetTechnicians {
 			}
 		else if ($this->isOnBackend()){
 			add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
-			echo $this->thePage->post_name;
 			if (isset($this->thePage) and ($this->thePage == null)){
 				add_action( 'admin_notices', array($this, 'makePage'));
 				//make a page if it doesn't already exist
