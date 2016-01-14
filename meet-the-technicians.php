@@ -76,10 +76,11 @@ class MeetTechnicians {
 		$this->tableName = $wpdb->prefix . $this->tableSuffixName;
 		$this->pageId = get_option('MTpageid');
 		
+		add_action('admin_head', array($this, 'initializeJavascript'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
+		
 		if ($this->isOnFrontend() or $this->isOnBackend()){ //user is in either MT area
 			$this->thePage = get_post($this->pageId);
-			add_filter('admin_head', array($this, 'initializeJavascript'));
-			add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
 			}
 		if ($this->isOnFrontend()){
 			add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
@@ -316,13 +317,10 @@ class MeetTechnicians {
 		}
 
 	/**
-	 * Registers and enqueues script.js on appropriate admin and frontend pages.
+	 * Registers and enqueues script.js
 	 * @param string $hook hook data passed by add_action
 	 */
 	function enqueueScript($hook) {
-		if (!$this->isOnFrontend() and !$this->isOnBackend()) {
-			return;
-			}
 		wp_register_script( 'mt_script', plugin_dir_url( __FILE__ ) . 'script.js' );
 		wp_enqueue_script( 'mt_script' );
 		}
@@ -344,7 +342,7 @@ class MeetTechnicians {
 	function initializeJavascript() {
 		?>
 		<script>
-			var pageName = "meettechnicians";
+			var pageName = "<?= $this->featureName ?>";
 			var redirectName = "<?= $this->tableSuffixName ?>";
 		</script>
 		<?php
