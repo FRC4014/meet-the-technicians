@@ -5,7 +5,8 @@
 global $wpdb;
 $thingsChanged = 0;
 
-if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
+//DELETE PERSON
+if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){
 	$succeed = $wpdb->delete($this->tableName, array('id' => $_POST["delete"]), array('%d'));
 	if ($succeed === 1){ 
 		$this->adminNotice ("Person deleted.");
@@ -14,11 +15,16 @@ if (isset($_POST["delete"]) and $_POST["delete"] != "-1"){ //delete data
 		$this->adminNotice("Person not deleted", "error");
 		}
 	}
-else if (isset($_POST["save"])){ //update data
+
+//UPDATE PERSON
+else if (isset($_POST["save"])){ 
+	//initialize data
 	$technicians = $this->getAll();
 	$save_data = $_POST;
 	unset($save_data["submit"]);
 	$data_array = array();
+	
+	//orgainze data
 	foreach ($save_data as $sliver => $data){
 		$mt_id = substr($sliver, 
 				strpos($sliver, "_") + 1, //after of first _
@@ -31,6 +37,7 @@ else if (isset($_POST["save"])){ //update data
 		$data_array[$mt_id][$attribute] = stripslashes($data);
 		}
 	$new_array = array();
+	
 	foreach ($data_array as $db_id => $data){
 		if ($data[name] == "" and 
 					$data[grade] == "" and
@@ -91,13 +98,16 @@ else if (isset($_POST["save"])){ //update data
 			}
 		}
 	}
+	
+//CHANGE FEATURE NAME
 if (isset($_POST["MTfeaturename"]) and $_POST["MTfeaturename"] != get_option("MTfeaturename")){
 	if ($this->changeFeatureName($_POST["MTfeaturename"]))
 		$this->adminNotice ("Page name saved!");
 	else
 		$this->adminNotice ("Invalid page name", "error");
 	}
-	
+
+//CHANGE TABLE SUFFIX
 if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MTtablesuffix")){
 	if ($_POST["MTfeaturename"] != "") {
 		update_option("MTtablesuffix", $_POST["MTtablesuffix"]);
@@ -108,6 +118,7 @@ if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MT
 		$this->adminNotice ("Invalid short name", "error");
 	}
 	
+//CHANGE POST STATUS
 $status = $wpdb->get_results( "SELECT post_status FROM " . $wpdb->prefix . 
 		"posts WHERE id='" . $this->pageId . "'", ARRAY_A );
 $status = $status[0][post_status];
@@ -117,6 +128,7 @@ if (isset($_POST["MTstatus"]) and $_POST["MTstatus"] != $status) {
 	$status = $_POST["MTstatus"];
 	}
 
+//OUTPUT THINGS CHANGED
 if ($thingsChanged > 1){
 		$this->adminNotice ("Saved. $thingsChanged fields changed!");
 		}
@@ -145,6 +157,7 @@ array_push($technicians, array(
 	hobbies => ''
 	));
 
+//OUTPUT EACH BOX
 foreach($technicians as $person){
 	if ($person[id] == "new"){$legend = "New Person";}
 	else {$legend = $person[name];}
