@@ -217,7 +217,7 @@ foreach($technicians as $person){
 			<input type="text" name="MTfeaturename" id="MTfeaturename" value="<?= esc_attr(get_option("MTfeaturename")) ?>">
 		</div>
 		<div>
-			<label for="MTtablesuffix">Database Name:</label>
+			<label for="MTtablesuffix">Database/Slug Name:</label>
 			<input type="text" name="MTtablesuffix" id="MTtablesuffix" value="<?= esc_attr(get_option("MTtablesuffix")) ?>">
 		</div>
 		<div>
