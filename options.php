@@ -92,14 +92,12 @@ else if (isset($_POST["save"])){ //update data
 		}
 	}
 if (isset($_POST["MTfeaturename"]) and $_POST["MTfeaturename"] != get_option("MTfeaturename")){
-	if ($_POST["MTfeaturename"] != "") {
-		update_option("MTfeaturename", $_POST["MTfeaturename"]);
-		$this->featureName = $_POST["MTfeaturename"];
+	if ($this->changeFeatureName($_POST["MTfeaturename"]))
 		$this->adminNotice ("Page name saved!");
-		}
 	else
 		$this->adminNotice ("Invalid page name", "error");
 	}
+	
 if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MTtablesuffix")){
 	if ($_POST["MTfeaturename"] != "") {
 		update_option("MTtablesuffix", $_POST["MTtablesuffix"]);

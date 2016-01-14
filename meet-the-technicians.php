@@ -216,11 +216,50 @@ class MeetTechnicians {
 			}
 		
 		}
+	
+	/**
+	 * Changes the value of featureName in all applicable places.
+	 *		changes instance variable
+	 *		updates WP database
+	 *		changes post_title of applicable page
+	 * @param string $newName the new featureName
+	 * @return boolean false on invalid name, true otherwise
+	 */
+	public function changeFeatureName ($newName) {
+		if ($newName == $this->featureName or $newName == "") return false;
+		
+		$this->featureName = $newName; //change instance variable for current excecution
+		
+		update_option("MTfeaturename", $newName); //update WP database
+		
+		$p = array();
+		$p['id'] = $this->pageId;
+		$p['post_title'] = $newName;
+		wp_update_post($p);
+		return true;
+		}
+	
+	/**
+	 * Changes the value of Table Suffix in all applicable places.
+	 *		changes instance variable
+	 *		updates WP database
+	 * @param string $newName the new tableSuffixName
+	 * @return boolean false on invalid name, true otherwise
+	 */
+	public function changeTableSuffixName ($newName){
+		if ($newName == $this->tableSuffixName or $newName == "") return false;
+		
+		$this->tableSuffixName = $newName; //change instance variable for current excecution
+		
+		update_option("MTtablesuffix", $newName); //update WP database
+
+		return true;
+		}
 		
 	/**
 	 * Makes admin notice about table updating using adminNotice
 	 */
-	function tableUpdatedNotice() {
+	public function tableUpdatedNotice() {
 		$this->adminNotice("$this->featureName: Table updated to version $this->tableVersion");
 		}
 
