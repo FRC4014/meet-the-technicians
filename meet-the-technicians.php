@@ -196,7 +196,7 @@ class MeetTechnicians {
 		}
 	
 	function makePage() {
-		if (isset($this->thePage) and ($this->thePage == null)) {
+		if (isset($this->thePage) and ($this->thePage != null)) {
 			return false;
 			}
 		$p = array();
