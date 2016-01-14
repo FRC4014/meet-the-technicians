@@ -127,7 +127,7 @@ if ($thingsChanged > 1){
 ?>
 <div class="wrap">
 <form method="post" action="" id="mt_form" autocomplete="off"> 
-<h2><?= $this->featureName ?></h2>
+<h2 id="main_title"><?= $this->featureName ?></h2>
 
 <div id="mt_input_container">
 <?php
