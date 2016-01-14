@@ -230,7 +230,7 @@ foreach($technicians as $person){
 				?>>Private</option>
 			</select>
 			<?php if (isset($this->thePage) and ($this->thePage != null)) {
-				echo '<a href="' . get_page_link($this->pageId)  . '">View page</a>';
+				echo '<a target="_blank" href="' . get_page_link($this->pageId)  . '">View page</a>';
 				}
 			?>
 		</div>
