@@ -109,10 +109,10 @@ if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MT
 	}
 	
 $status = $wpdb->get_results( "SELECT post_status FROM " . $wpdb->prefix . 
-		"posts WHERE id='" . $page->ID . "'", ARRAY_A );
+		"posts WHERE id='" . $this->pageId . "'", ARRAY_A );
 $status = $status[0][post_status];
 if (isset($_POST["MTstatus"]) and $_POST["MTstatus"] != $status) {
-	$wpdb->update( $wpdb->posts, array( 'post_status' => $_POST["MTstatus"] ), array( 'ID' => $page->ID ));
+	$wpdb->update( $wpdb->posts, array( 'post_status' => $_POST["MTstatus"] ), array( 'ID' => $this->pageId ));
 	$this->adminNotice ("Post status saved!");
 	$status = $_POST["MTstatus"];
 	}
@@ -230,7 +230,7 @@ foreach($technicians as $person){
 				?>>Private</option>
 			</select>
 			<?php if ($this->pageExists()) {
-				echo '<a href="' . get_page_link($page->ID)  . '">View page</a>';
+				echo '<a href="' . get_page_link($this->pageId)  . '">View page</a>';
 				}
 			?>
 		</div>
