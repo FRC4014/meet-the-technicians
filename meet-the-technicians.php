@@ -81,13 +81,12 @@ class MeetTechnicians {
 		
 		if ($this->isOnFrontend() or $this->isOnBackend()){ //user is in either MT area
 			$this->thePage = get_post($this->pageId);
-			
 			}
-		if ($this->isOnFrontend()){
-			add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
-			add_filter('the_content', array($this, 'pageFilter'));
-			}
-		else if ($this->isOnBackend()){
+		
+		add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
+		add_filter('the_content', array($this, 'pageFilter'));
+		
+		if ($this->isOnBackend()){
 			add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
 			if (isset($this->thePage) and ($this->thePage == null)){
 				add_action( 'admin_notices', array($this, 'makePage'));
@@ -167,11 +166,10 @@ class MeetTechnicians {
 	
 	/**
 	 * Test if the page requested is the frontend of the Meet the Technicians
-	 * page.
+	 * page.  Only works after get_the_id is initialized.
 	 * @return boolean true if the id of the current page matches the pageId
 	 */
 	private function isOnFrontend(){
-		//echo get_the_id() . "test";
 		if (!is_admin()){
 			return (get_the_id() == $this->pageId);
 			}
