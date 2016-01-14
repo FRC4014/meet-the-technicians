@@ -81,6 +81,7 @@ class MeetTechnicians {
 		
 		if ($this->isOnFrontend() or $this->isOnBackend()){ //user is in either MT area
 			$this->thePage = get_post($this->pageId);
+			
 			}
 		if ($this->isOnFrontend()){
 			add_action('wp_enqueue_scripts', array($this, 'enqueuePageStyle'));
@@ -88,6 +89,15 @@ class MeetTechnicians {
 			}
 		else if ($this->isOnBackend()){
 			add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
+			echo $this->thePage->post_name;
+			if (isset($this->thePage) and ($this->thePage == null)){
+				add_action( 'admin_notices', array($this, 'makePage'));
+				//make a page if it doesn't already exist
+				}
+			else if ($this->thePage->post_name != get_option("MTtablesuffix")){
+				$wpdb->update( $wpdb->posts, array( 'post_name' => get_option("MTtablesuffix") ), array( 'ID' => $this->pageId ));
+				//changes slug to table suffix if not already
+				}
 			}
 		if (is_admin()){ //user is in the admin area
 			add_action('admin_menu', array($this, 'addAdminMenu'));
@@ -95,10 +105,6 @@ class MeetTechnicians {
 			
 			if ($this->tableVersion != get_option("MTversion")){
 				$this->createTable(); //updates if new tableversion 
-				}
-			if (isset($this->thePage) and ($this->thePage == null)){
-				add_action( 'admin_notices', array($this, 'makePage'));
-				//make a page if it doesn't already exist
 				}
 			}
 		register_activation_hook(__FILE__, array($this, 'activate'));
