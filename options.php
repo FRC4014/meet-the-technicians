@@ -229,7 +229,7 @@ foreach($technicians as $person){
 				if ($status == "draft") echo " selected"
 				?>>Private</option>
 			</select>
-			<?php if ($this->pageExists()) {
+			<?php if (isset($this->thePage) and ($this->thePage == null)) {
 				echo '<a href="' . get_page_link($this->pageId)  . '">View page</a>';
 				}
 			?>
