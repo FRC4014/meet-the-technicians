@@ -4,12 +4,13 @@ $people = $this->getAll();
 $the_content = "";
 shuffle($people); //randomize order
 
+$the_content .=  '<div id="meetthetechnicians">';
 foreach($people as $person){
-	$the_content .=  '<div class="mt_person" id="mt_' . $person[id] . '">';
+	$the_content .=  '<div class="person" id="' . $person[id] . '">';
 	foreach (array(name, grade, years, title, pic, description, quote, hobbies) as $attribute){
 		if ($person[$attribute] == "") continue;
-		$the_content .=  '<div class="mt_label ' . $attribute . '">' . $attribute . '</div>';
-		$the_content .=  '<div class="mt_field mt_' . $attribute . '">' .
+		$the_content .=  '<div class="label ' . $attribute . '">' . $attribute . '</div>';
+		$the_content .=  '<div class="field ' . $attribute . '">' .
 					$person[$attribute] . 
 					'</div>' . "\n";
 		
