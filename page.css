@@ -1,29 +1,38 @@
 /*style for meet the technicians page*/
 #mt {
     text-align: center;
-    vertical-align: middle;
     }
-#mt .person {
+#mt .person{
+    box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
-    width: 200px;
-    height: 200px;
-    padding: 10px;
+    width: 250px;
+    height: 250px;
+    padding: 30px;
+    padding-top: 180px;
     margin: 10px;
     border-radius: 5px;
     border: 3px solid black;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    color: black;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     
-    -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s;
-    transition: width .5s, height .5s, transform .5s, margin .5s;
+    -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s, padding 1s;
+    transition: width .5s, height .5s, transform .5s, margin .5s, padding 1s;
     }
-#mt .person:hover {
-    height: 240px;
-    width: 240px;
+#mt > .person > .field{
+    vertical-align: bottom;
+    }
+#mt > .person:hover {
+    padding-top: 30px;
+    height: 290px;
+    width: 290px;
     margin: 0px;
+    background-image: none !important;
     }
+
 #mt>.person>img{
     padding: 0;
     border: none;
@@ -44,5 +53,9 @@
 .name {
     font-size: 20pt;
     font-weight: bold;
-    
+    margin-bottom: 0px;
+    transition: margin-bottom .5s;
+    }
+#mt > .person:hover > .name{
+    margin-bottom: 10px;
     }
