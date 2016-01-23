@@ -10,9 +10,21 @@ foreach($people as $person){
 			. 'style="background-image: url(' . $person[pic] . ');">' . "\n";
 	foreach (array(name, grade, years, title, description, quote, hobbies) as $attribute){
 		if ($person[$attribute] == "") continue;
+		else if ($attribute == "grade") {
+			if ($person[$attribute]  == 9) $person[$attribute] = "Nineth";
+			if ($person[$attribute]  == 10) $person[$attribute] = "Tenth";
+			if ($person[$attribute]  == 11) $person[$attribute] = "Eleventh";
+			if ($person[$attribute]  == 12) $person[$attribute] = "Twelfth";
+			$person[$attribute] .= " grade";
+			}
+		else if ($attribute == "years") {
+			if ($person[$attribute] == 1)
+				$person[$attribute] = "First year on the team";
+			else
+				$person[$attribute] .= " years on the team";
+			}
 		$the_content .=  '<div class="field ' . $attribute . '">' .
-					$person[$attribute] . 
-					'</div>' . "\n";
+					$person[$attribute] . '</div>' . "\n";
 		
 		}
 	$the_content .= '</div>';
