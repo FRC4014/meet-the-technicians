@@ -186,7 +186,7 @@ foreach($technicians as $person){
 		echo '</label>';
 		
 		if ($attribute == "description"){ //for longer (paragraph) fields
-			echo '<textarea name="' . $id . '">';
+			echo '<textarea name="' . $id . '" maxlength="' . $info[1] . '">';
 			echo esc_attr($person[$attribute]);
 			echo '</textarea>'  . '</div>'. "\n";
 			}
