@@ -74,7 +74,7 @@ else if (isset($_POST["save"])){
 				$newperson = true;
 				}
 			else {
-				$this->adminNotice("Not saved", "error");
+				$this->adminNotice("Not saved.  Maybe some of your answers are invalid or too big?", "error");
 				}
 			continue; //don't allow it to add to $new_array
 			}
