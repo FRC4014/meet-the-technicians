@@ -88,7 +88,7 @@ class MeetTechnicians {
 		
 		if ($this->isOnBackend()){
 			add_action('admin_enqueue_scripts', array($this, 'enqueueAdminStyle'));
-			if (isset($this->thePage) and ($this->thePage == null)){
+			if (!isset($this->thePage)){
 				add_action( 'admin_notices', array($this, 'makePage'));
 				//make a page if it doesn't already exist
 				}
@@ -193,7 +193,7 @@ class MeetTechnicians {
 		}
 	
 	function makePage() {
-		if (isset($this->thePage) and ($this->thePage != null)) {
+		if (!isset($this->thePage)) {
 			return false;
 			}
 		$p = array();
