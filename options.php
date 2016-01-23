@@ -113,6 +113,7 @@ if (isset($_POST["MTtablesuffix"]) and $_POST["MTtablesuffix"] != get_option("MT
 		update_option("MTtablesuffix", $_POST["MTtablesuffix"]);
 		$this->tableSuffix = $_POST["MTtablesuffix"];
 		$this->adminNotice ('Database name saved! (note: old data still stored in old database)');
+		echo '<script>window.location.reload();</script>';
 		}
 	else
 		$this->adminNotice ("Invalid short name", "error");
