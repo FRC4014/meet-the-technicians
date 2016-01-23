@@ -1,9 +1,11 @@
 /*style for meet the technicians page*/
 #mt {
     text-align: center;
+    vertical-align: middle;
     }
 #mt .person {
     display: inline-block;
+    vertical-align: middle;
     width: 200px;
     height: 200px;
     padding: 10px;
@@ -15,15 +17,12 @@
     background-position: center center;
     
     -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s;
-    transition: width .5s, height .5s, transform .5s, margin .5;
+    transition: width .5s, height .5s, transform .5s, margin .5s;
     }
 #mt .person:hover {
     height: 240px;
     width: 240px;
     margin: 0px;
-    }
-#mt .person:hover > .field {
-    display: block;
     }
 #mt>.person>img{
     padding: 0;
@@ -33,5 +32,17 @@
     width: 125px;
     }
 #mt .field:not(.name):not(.title){
+    opacity: 0;
     display: none;
+    -webkit-transition: opacity .5s;
+    transition: opacity .5s;
+    }
+#mt .person:hover > .field {
+    display: block !important;
+    opacity: 1;
+    }
+.name {
+    font-size: 20pt;
+    font-weight: bold;
+    
     }
