@@ -16,6 +16,14 @@ span.mt_optional{
 .mt_field{
     margin-top: 1px;
     }
+.mt_field > textarea{
+    height: 60px;
+    -webkit-transition: height 1s;
+    transition: height 1s;
+    }
+.mt_field > textarea:hover {
+    height: 300px;
+    }
     
 fieldset.mt_person{
     display: inline-block;
