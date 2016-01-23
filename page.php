@@ -11,19 +11,6 @@ foreach($people as $person){
 	foreach (array(name, title, grade, years, quote, hobbies, description) as $attribute){
 		$label = null;
 		if ($person[$attribute] == "") continue;
-//		else if ($attribute == "grade") {
-//			if ($person[$attribute]  == 9) $person[$attribute] = "Nineth";
-//			if ($person[$attribute]  == 10) $person[$attribute] = "Tenth";
-//			if ($person[$attribute]  == 11) $person[$attribute] = "Eleventh";
-//			if ($person[$attribute]  == 12) $person[$attribute] = "Twelfth";
-//			$person[$attribute] .= " grade";
-//			}
-//		else if ($attribute == "years") {
-//			if ($person[$attribute] == 1)
-//				$person[$attribute] = "First year on the team";
-//			else
-//				$person[$attribute] .= " years on the team";
-//			}
 		else if ($attribute == "grade") $label = "Grade:";
 		else if ($attribute == "years") $label = "Years on the team:";
 		else if ($attribute == "title") $label = "Title/Responsibilities:";
