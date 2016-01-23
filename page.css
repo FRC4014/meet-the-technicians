@@ -14,13 +14,13 @@
     background-repeat: no-repeat;
     background-position: center center;
     
-    -webkit-transition: width 1s, height 1s, -webkit-transform 1s, margin 1s;
-    transition: width 1s, height 1s, transform 1s, margin 1s;
+    -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s;
+    transition: width .5s, height .5s, transform .5s, margin .5;
     }
 #mt .person:hover {
-    height: 125%;
-    width: 110%;
-    margin: 5px;
+    height: 240px;
+    width: 240px;
+    margin: 0px;
     }
 #mt .person:hover > .field {
     display: block;
