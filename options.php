@@ -171,10 +171,10 @@ foreach($technicians as $person){
 		grade => array("Grade", 2, true, 2), 
 		years => array("Years on the Team", 2, true, 2), 
 		title => array("Title/Responsibilities", 60, true, 30), 
-		pic => array("URL to Picture", 100, true, 30), 
-		description => array("Description", 200, false), 
-		quote => array("Quote", 50, false, 30), 
-		hobbies => array("Hobbies", 50, false, 30)
+		pic => array("URL to Picture", 200, true, 30), 
+		description => array("Description", 500, false), 
+		quote => array("Quote", 100, false, 30), 
+		hobbies => array("Hobbies", 100, false, 30)
 			);
 	
 	foreach ($fields as $attribute => $info){
