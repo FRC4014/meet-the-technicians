@@ -68,3 +68,6 @@
 #mt > .person:hover > .name{
     margin-bottom: 10px;
     }
+.field.description{
+    padding-top: 10px;
+    }
