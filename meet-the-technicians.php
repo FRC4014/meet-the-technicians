@@ -101,8 +101,9 @@ class MeetTechnicians {
 			add_action('admin_menu', array($this, 'addAdminMenu'));
 				//add sidebar option
 			
-			if ($this->tableVersion != get_option("MTversion")){
-				$this->createTable(); //updates if new tableversion 
+			if ($this->tableVersion != get_option("MTversion") or 
+					empty($wpdb->get_results("DESCRIBE $this->tableName", ARRAY_A))){
+				$this->createTable();
 				}
 			}
 		register_activation_hook(__FILE__, array($this, 'activate'));
