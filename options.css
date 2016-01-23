@@ -36,7 +36,8 @@ fieldset.mt_person{
 .mt_person img{
     border: 2px solid #ddd;
     margin-top: 5px;
-    height: 200px;
+    height: 250px;
+    background-position: center center;
     object-fit: cover;
     }
 #person_new {
