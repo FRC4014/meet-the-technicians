@@ -9,7 +9,7 @@
     width: 250px;
     height: 250px;
     padding: 30px;
-    padding-top: 180px;
+    padding-top: 170px;
     margin: 10px;
     border-radius: 5px;
     border: 3px solid black;
@@ -17,13 +17,15 @@
     background-repeat: no-repeat;
     background-position: center center;
     color: black;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
     
     -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s, padding 1s;
     transition: width .5s, height .5s, transform .5s, margin .5s, padding 1s;
     }
 #mt > .person > .field{
     vertical-align: bottom;
+    line-height: 110%;
+    margin-bottom: 5px;
     }
 #mt > .person:hover {
     padding-top: 30px;
@@ -46,15 +48,21 @@
     -webkit-transition: opacity .5s;
     transition: opacity .5s;
     }
+#mt .label{
+    display: none;
+    }
 #mt .person:hover > .field {
     display: block !important;
     opacity: 1;
     }
+#mt .person:hover > .label {
+    display: block;
+    font-weight: bold;
+}
 .name {
     font-size: 20pt;
     font-weight: bold;
-    margin-bottom: 0px;
-    transition: margin-bottom .5s;
+    margin-bottom: 10px;
     }
 #mt > .person:hover > .name{
     margin-bottom: 10px;
