@@ -19,7 +19,7 @@ class MeetTechnicians {
 	 * @var string arbitrary version number for the table.  when this changes, 
 	 * the table is refreshed
 	 */
-	private $tableVersion = "30";
+	private $tableVersion = "31";
 	
 	/**
 	 * @var string the name of the frontend AND backend pages
@@ -142,7 +142,7 @@ class MeetTechnicians {
 			grade smallint(2) NOT NULL,
 			years smallint(2) NOT NULL,
 			title varchar(75) NOT NULL,
-			pic varchar(100) NOT NULL,
+			pic varchar(200) NOT NULL,
 			description varchar(500),
 			quote varchar(100),
 			hobbies varchar(100),
