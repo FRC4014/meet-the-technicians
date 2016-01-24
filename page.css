@@ -3,13 +3,15 @@
     text-align: center;
     }
 #mt .person{
+    position: relative;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
-    width: 250px;
+    text-align: center;
+    width: 240px;
     height: 250px;
-    padding: 30px;
-    padding-top: 170px;
+    padding: 10px;
+    padding-top: 160px;
     margin: 10px;
     border-radius: 5px;
     border: 3px solid black;
@@ -22,12 +24,20 @@
     -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s, padding 1s;
     transition: width .5s, height .5s, transform .5s, margin .5s, padding 1s;
     }
-#mt > .person > .field{
-    vertical-align: bottom;
+#mt .text{
+    display: inline-block;
     line-height: 110%;
     margin-bottom: 5px;
+    border-radius: 5px;
+    background: rgba(256, 256, 256, 0.7);
+    width: 190px;
+    height: 55px;
+    vertical-align: middle;
+    padding: 5px;
+    padding-top: 10px;
     }
-#mt > .person:hover {
+#mt .person:hover {
+    padding: 30px;
     padding-top: 30px;
     min-height: 290px;
     width: 290px;
@@ -36,7 +46,7 @@
     overflow: auto;
     }
 
-#mt>.person>img{
+#mt .person img{
     padding: 0;
     border: none;
     border-radius: 5px;
@@ -52,11 +62,12 @@
 #mt .label{
     display: none;
     }
-#mt .person:hover > .field {
+#mt .person:hover .field {
     display: block !important;
     opacity: 1;
     }
-#mt .person:hover > .label {
+#mt .person:hover .label {
+    margin-top: 6px;
     display: block;
     font-weight: bold;
 }
@@ -65,8 +76,9 @@
     font-weight: bold;
     margin-bottom: 10px;
     }
-#mt > .person:hover > .name{
-    margin-bottom: 10px;
+#mt .person:hover .name{
+    margin-bottom: 20px;
+    margin-top: -20px;
     }
 .field.description{
     padding-top: 10px;
