@@ -16,6 +16,7 @@ foreach($people as $person){
 		else if ($attribute == "years") $label = "Years on the team:";
 		else if ($attribute == "title") $label = "Title/Responsibilities:";
 		else if ($attribute == "quote") $label = "Favorite Quote:";
+		else if ($attribute == "hobbies") $label = "Hobbies:";
 		
 		if (isset($label))
 			$the_content .=  '<div class="label ' . $attribute . '">' .
