@@ -8,6 +8,7 @@ $the_content .=  '<div id="mt">';
 foreach($people as $person){
 	$the_content .=  '<div class="person" id="' . $person[id] . '" '
 			. 'style="background-image: url(' . $person[pic] . ');">' . "\n";
+	$the_content .= '<div class="text">' . "\n";
 	foreach (array(name, title, grade, years, quote, hobbies, description) as $attribute){
 		$label = null;
 		if ($person[$attribute] == "") continue;
@@ -23,6 +24,6 @@ foreach($people as $person){
 					$person[$attribute] . '</div>' . "\n";
 		
 		}
-	$the_content .= '</div>';
+	$the_content .= '</div></div>';
 	}
 ?>
