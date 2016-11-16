@@ -170,7 +170,7 @@ foreach($technicians as $person){
 		name => array("Name", 30, true, 30),  
 		grade => array("Grade", 2, true, 2), 
 		years => array("Years on the Team", 2, true, 2), 
-		title => array("Title/Responsibilities", 60, true, 30), 
+		title => array("Title/Responsibilities", 40, true, 30), 
 		pic => array("URL to Picture", 200, true, 30), 
 		description => array("Description", 500, false), 
 		quote => array("Quote", 100, false, 30), 
