@@ -1,7 +1,7 @@
 <?php //file to output to the page using $the_content.  Included in meet-the-technicians.php.
 
 $people = $this->getAll();
-$the_content = "";
+$the_content = '';
 shuffle($people); //randomize order
 
 $the_content .=  '<div id="mt">';
@@ -31,13 +31,12 @@ foreach($people as $person){
 $the_content.= '<div class="person" id="join" style="background-image: url(http://tophattechnicians.com/wp-content/uploads/2015/09/Hat-white.png);">
 <div class="text">
     <div class="field name">You?</div>
-    <div class="field title">Join the team today!</div>
+    <div class="label description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ac odio vehicula molestie at id nibh. Curabitur gravida posuere elit, at accumsan magna facilisis a. Pellentesque porta cursus nunc, ut tempor lacus facilisis a.</div>
     <div class="label"> <!--- wrapped in label so it will be hidden when not hovered -->
-        
-    </div>
-</div>
-<div class="call-to-action" style="margin-top: 50px; ">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKTtJCN1GhkdAJOt5NfMOjTUioTx6_-9mV9oDRuxCRa3ZdDg/viewform" class="blue button">Join the Team</a>
+        <div class="call-to-action">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKTtJCN1GhkdAJOt5NfMOjTUioTx6_-9mV9oDRuxCRa3ZdDg/viewform" class="blue button">Join the Team</a>
         </div>
-</div>';
+    </div>
+</div></div>
+';
 ?>

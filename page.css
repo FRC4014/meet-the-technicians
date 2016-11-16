@@ -31,7 +31,7 @@
     border-radius: 5px;
     background: rgba(256, 256, 256, 0.7);
     width: 190px;
-    height: 55px;
+    height: 30px;
     vertical-align: middle;
     padding: 5px;
     padding-top: 10px;
@@ -67,6 +67,9 @@
     display: block !important;
     opacity: 1;
     }
+#mt .person:hover .field:last-child {
+    margin-bottom: 20px;
+    }
 #mt .person:hover .label {
     margin-top: 6px;
     display: block;
@@ -82,14 +85,25 @@
     margin-top: -20px;
     }
 .person#join .call-to-action{
-    position: absolute;
-    top: 130px;
-    left: 0;
+    margin-top: 20px;
     width: 100%;
     }
 .person#join .call-to-action .button {
     background-color: #1874cd;
+    font-size: 14pt;
+    padding: 10px 20px;
     }
+.person#join .call-to-action .button:hover {
+    background-color: #4d99e2;
+    }
+.person#join .field.name{
+    font-size: 40pt;
+    margin-top: 20px;
+}
+.person#join:hover .field.name{
+    font-size: 20pt;
+    margin-top: -10px;
+}
 .field.description{
     padding-top: 10px;
     }
