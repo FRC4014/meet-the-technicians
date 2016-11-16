@@ -19,7 +19,6 @@
     background-repeat: no-repeat;
     background-position: center center;
     color: black;
-    /*text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;*/
     
     -webkit-transition: width .5s, height .5s, -webkit-transform .5s, margin .5s, padding 1s;
     transition: width .5s, height .5s, transform .5s, margin .5s, padding 1s;
@@ -29,12 +28,9 @@
     margin-bottom: 5px;
     border-radius: 5px;
     background: rgba(256, 256, 256, 0.7);
-    /*width: 190px;*/
-    height: 30px;
-    vertical-align: middle;
+    height: 60px;
     padding: 5px;
     padding-top: 10px;
-    padding-bottom: 30px;
     }
 #mt .person:hover .text{
     width: auto;
@@ -78,10 +74,20 @@
 .name {
     font-size: 20pt;
     font-weight: bold;
+    margin-top: 5px;
     margin-bottom: 10px;
     }
 #mt .person:hover .name{
     margin-bottom: 20px;
+    }
+.field.description{
+    padding-top: 10px;
+    }
+    
+    
+    
+.person#join {
+    overflow: hidden; /* fix for floppy scrollbars during transition */
     }
 .person#join .call-to-action{
     margin-top: 20px;
@@ -107,7 +113,3 @@
 .person#join:hover{
     padding: 0px;
 }
-
-.field.description{
-    padding-top: 10px;
-    }
