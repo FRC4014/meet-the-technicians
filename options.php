@@ -153,7 +153,7 @@ array_push($technicians, array(
 	grade => '', 
 	years => '', 
 	title => '', 
-	pic => '', 
+	pic => 'http://tophattechnicians.com/wp-content/uploads/2015/09/Hat-white.png', 
 	description => '', 
 	quote => '', 
 	hobbies => ''
@@ -190,7 +190,7 @@ foreach($technicians as $person){
 			echo esc_attr($person[$attribute]);
 			echo '</textarea>'  . '</div>'. "\n";
 			}
-		else if ($attribute =="pic"){
+		else if ($attribute == "pic"){
 			echo '<input type="text" name="' . $id .  
 					'" id="' . $id . 
 					'" value="' . esc_attr($person[$attribute]) . 
