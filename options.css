@@ -22,7 +22,7 @@ span.mt_optional{
     transition: height 1s;
     }
 .mt_field > textarea:hover {
-    height: 300px;
+    height: 200px;
     }
     
 fieldset.mt_person{
@@ -45,8 +45,9 @@ fieldset.mt_person{
     border: 2px solid #ddd;
     margin-top: 5px;
     height: 250px;
+    background-size: cover; /* known issue: images stretch in edge, probably a ms bug. */ 
+    background-repeat: no-repeat;
     background-position: center center;
-    object-fit: cover;
     }
 #person_new {
     display: none;
