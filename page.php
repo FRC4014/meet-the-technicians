@@ -25,6 +25,19 @@ foreach($people as $person){
 					$person[$attribute] . '</div>' . "\n";
 		
 		}
-	$the_content .= '</div></div>';
+	$the_content .= "</div></div>\n\n";
 	}
+        
+$the_content.= '<div class="person" id="join" style="background-image: url(http://tophattechnicians.com/wp-content/uploads/2015/09/Hat-white.png);">
+<div class="text">
+    <div class="field name">You?</div>
+    <div class="field title">Join the team today!</div>
+    <div class="label"> <!--- wrapped in label so it will be hidden when not hovered -->
+        
+    </div>
+</div>
+<div class="call-to-action" style="margin-top: 50px; ">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKTtJCN1GhkdAJOt5NfMOjTUioTx6_-9mV9oDRuxCRa3ZdDg/viewform" class="blue button">Join the Team</a>
+        </div>
+</div>';
 ?>

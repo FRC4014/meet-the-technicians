@@ -35,6 +35,7 @@
     vertical-align: middle;
     padding: 5px;
     padding-top: 10px;
+    padding-bottom: 30px;
     }
 #mt .person:hover {
     padding: 30px;
@@ -79,6 +80,15 @@
 #mt .person:hover .name{
     margin-bottom: 20px;
     margin-top: -20px;
+    }
+.person#join .call-to-action{
+    position: absolute;
+    top: 130px;
+    left: 0;
+    width: 100%;
+    }
+.person#join .call-to-action .button {
+    background-color: #1874cd;
     }
 .field.description{
     padding-top: 10px;
