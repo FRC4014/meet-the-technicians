@@ -42,8 +42,7 @@ else if (isset($_POST["save"])){
 		if ($data[name] == "" and 
 					$data[grade] == "" and
 					$data[years] == "" and
-					$data[title] == "" and
-					$data[pic] == ""){
+					$data[title] == ""){
 				continue; //none of new is filled out
 				}
 		if ($data[name] == "" or 
