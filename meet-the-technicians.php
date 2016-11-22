@@ -1,9 +1,9 @@
 <?php
 /**
-Plugin Name: Meet the Technicians - IN DEVELOPMENT
+Plugin Name: Meet the Technicians
 Plugin URI:  https://github.com/FRC4014/meet-the-technicians
 Description: Makes a page with a nicely designed grid of the the members of your team.
-Version:     1.0
+Version:     2.0
 Author:      Lucas LeVieux
 Author URI:  http://lucaslevieux.com
 License:     GPL2
