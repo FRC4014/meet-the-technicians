@@ -76,8 +76,8 @@ class MeetTechnicians {
 		$this->tableName = $wpdb->prefix . $this->tableSuffixName;
 		$this->pageId = get_option('MTpageid');
 		
-		add_action('admin_head', array($this, 'initializeJavascript'));
-		add_action('admin_enqueue_scripts', array($this, 'enqueueScript'));
+		add_action('admin_head', array($this, 'initializeAdminJavascript')); //initialize variables
+		add_action('admin_enqueue_scripts', array($this, 'enqueueAdminScript')); //actually add script
 		
 		if ($this->isOnFrontend() or $this->isOnBackend()){ //user is in either MT area
 			$this->thePage = get_post($this->pageId);
@@ -298,7 +298,8 @@ class MeetTechnicians {
 		}
 
 	/**
-	 * Registers and enqueues options.css on appropriate admin page.
+	 * Registers and enqueues options.css (custom stylesheet) and thickbox
+         * ("add media" stylesheet) on appropriate admin page.
 	 * @param string $hook hook data passed by add_action
 	 */
 	function enqueueAdminStyle($hook) {
@@ -307,6 +308,7 @@ class MeetTechnicians {
 			}
 		wp_register_style( 'mt_admin_style', plugin_dir_url( __FILE__ ) . 'options.css' );
 		wp_enqueue_style( 'mt_admin_style' );
+                wp_enqueue_style('thickbox');
 		}
 
 	/**
@@ -324,9 +326,10 @@ class MeetTechnicians {
 	 * Registers and enqueues script.js
 	 * @param string $hook hook data passed by add_action
 	 */
-	function enqueueScript($hook) {
-		wp_register_script( 'mt_script', plugin_dir_url( __FILE__ ) . 'script.js' );
+	function enqueueAdminScript($hook) {
+		wp_register_script( 'mt_script', plugin_dir_url( __FILE__ ) . 'options.js' );
 		wp_enqueue_script( 'mt_script' );
+                wp_enqueue_script('thickbox');
 		}
 	
 	/** 
@@ -343,7 +346,7 @@ class MeetTechnicians {
 	 * Defines variables in javascript to be used in script.js. To be add 
 	 * action'd in admin_head.
 	 */
-	function initializeJavascript() {
+	function initializeAdminJavascript() {
 		?>
 		<script>
 			var pageName = "<?= $this->featureName ?>";
@@ -353,7 +356,7 @@ class MeetTechnicians {
 		}
 	} //end class
 	
-	
+//INSTANTIATE THE CLASS
 if (get_option("MTfeaturename") !== false && get_option("MTtablesuffix") !== false){
 	//wordpress options are defined (as they should be, per install)
 	$meettechnicians = new MeetTechnicians(get_option("MTfeaturename"), get_option("MTtablesuffix"));
