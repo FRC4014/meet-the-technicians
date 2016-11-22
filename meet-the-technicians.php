@@ -323,7 +323,8 @@ class MeetTechnicians {
 		}
 
 	/**
-	 * Registers and enqueues script.js
+	 * Registers and enqueues options.js as well as thickbox ("add media" 
+         * script), to be done on an appropriate admin page.
 	 * @param string $hook hook data passed by add_action
 	 */
 	function enqueueAdminScript($hook) {
