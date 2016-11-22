@@ -9,7 +9,15 @@ function revealNewPerson (){
     document.getElementById('person_new').style.display = 'inline-block';
     document.getElementById('addnew').style.display = 'none';
     }
+    
+jQuery('document').ready(function(){
+    jQuery('.button.upload-image').click(function(){
+        jQuery(this).addClass('uploading'); //add to allow change to the pic and img
+    });
+});
 
+function send_to_editor(input){ //dummy function to fulfill  wordpress api
+    }
 
 window.addEventListener("DOMContentLoaded", redirectPage, false);
 window.addEventListener("DOMContentLoaded", registerHelper, false);

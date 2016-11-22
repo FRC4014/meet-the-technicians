@@ -171,7 +171,7 @@ foreach($technicians as $person){
 		grade => array("Grade", 2, true, 2), 
 		years => array("Years on the Team", 2, true, 2), 
 		title => array("Title/Responsibilities", 40, true, 30), 
-		pic => array("URL to Picture", 200, true, 30), 
+		pic => array("Picture", 200, true, 30), 
 		description => array("Description", 500, false), 
 		quote => array("Quote", 100, false, 30), 
 		hobbies => array("Hobbies", 100, false, 30)
@@ -191,7 +191,7 @@ foreach($technicians as $person){
 			echo '</textarea>'  . '</div>'. "\n";
 			}
 		else if ($attribute == "pic"){
-			echo '<input type="text" name="' . $id .  
+			echo '<input type="hidden" name="' . $id .  
 					'" id="' . $id . 
 					'" value="' . esc_attr($person[$attribute]) . 
 					'" maxlength = "' . $info[1] .
@@ -199,6 +199,13 @@ foreach($technicians as $person){
 					'onfocusout="' . "document.getElementById('mt_$person[id]_img').src = this.value;" .
 					'"/></div>' . "\n";
 			echo '<img src="' . $person[$attribute] . '" id="mt_' . $person[id] . '_img" width="240px" />';
+                        
+                        //make upload image iframe and button
+                        $image_library_url = get_upload_iframe_src( 'image', null, 'type' );
+                        $image_library_url = remove_query_arg( array('TB_iframe'), $image_library_url );
+                        $image_library_url = add_query_arg( array('context' => 'meet-technicians', 'TB_iframe' => 1 ), $image_library_url );
+                        echo '<a title="Upload Image for ' . $person[name] . '" href="' . esc_url( $image_library_url ) . 
+                                '" class="button thickbox upload-image" person="'.$person[id].'">Upload New Picture</a>';
 			}
 		else {
 			if ($attribute == "grade" or $attribute == "years") $size = 2;

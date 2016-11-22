@@ -78,6 +78,9 @@ class MeetTechnicians {
 		
 		add_action('admin_head', array($this, 'initializeAdminJavascript')); //initialize variables
 		add_action('admin_enqueue_scripts', array($this, 'enqueueAdminScript')); //actually add script
+                
+                //filters and actions for 'add image' iframe on backend
+                add_action('admin_menu', array($this, 'addImageFilters')); 
 		
 		if ($this->isOnFrontend() or $this->isOnBackend()){ //user is in either MT area
 			$this->thePage = get_post($this->pageId);
@@ -341,7 +344,7 @@ class MeetTechnicians {
 		$this->createTable();
 		add_option("MTfeaturename", "Meet the Technicians");
 		add_option("MTtablesuffix", "meettechnicians");
-	}
+                }
 		
 	/**
 	 * Defines variables in javascript to be used in script.js. To be add 
@@ -354,7 +357,68 @@ class MeetTechnicians {
 			var redirectName = "<?= $this->tableSuffixName ?>";
 		</script>
 		<?php
-		}
+                }
+        
+        /**
+         * Filter to add custom button to the iframe on the image uploader on 
+         * the backend.
+         * @param type $form_fields
+         * @param type $post
+         * @return string
+         */
+        function uploadImageButtonFilter($form_fields, $post) {
+                $send = "<input type='submit' class='button' name='send[$post->ID]' value='" . esc_attr__( 'Use Image' ) . "' />";  
+                $form_fields['buttons'] = array('tr' => "\t\t<tr class='submit'><td></td><td class='savesend'>$send</td></tr>\n");
+                $form_fields['context'] = array( 'input' => 'hidden', 'value' => 'meet-technicians' );
+                return $form_fields;
+                }
+        
+        /**
+         * Filter to change the URL via javascript when the image is uploaded.
+         * Added by addImageFilters, which is excecuted in admin_menu.
+         * @param type $html
+         * @param type $send_id
+         * @param type $attachment
+         */
+        function uploadImageAction($html, $send_id, $attachment) {
+                ?>
+                <script type="text/javascript">
+                    var personid = window.top.document.getElementsByClassName('uploading')[0].getAttribute("person");
+                    console.log(personid);
+                    window.top.document.getElementById('mt_' + personid + '_pic').value = '<?= $attachment['url'] ?>';
+                    window.top.document.getElementById('mt_' + personid + '_img').src = '<?= $attachment['url'] ?>';
+                    window.top.tb_remove();
+                </script>
+                <?php
+                }
+                
+        /**
+         * To be run in admin_menu.  Adds uploadImageButtonFilter and
+         * uploadImageAction, if it's in the customize upload iframe from the 
+         * mt backend
+         */
+        function addImageFilters($hook){
+                if ($this->check_upload_image_context('meet-technicians')) { //if in iframe
+                        add_filter('attachment_fields_to_edit', array($this, 'uploadImageButtonFilter'), 20, 2);
+                        add_filter('media_send_to_editor', array($this, 'uploadImageAction'), 10, 3);
+                        }
+                }
+                
+        function add_my_context_to_url($url, $type) {
+            if ($type != 'image') return $url;
+            if (isset($_REQUEST['context'])) {
+                $url = add_query_arg('context', $_REQUEST['context'], $url);
+                }
+            return $url;    
+            }
+
+        function check_upload_image_context($context) {
+            if (isset($_REQUEST['context']) && $_REQUEST['context'] == $context) {
+                add_filter('media_upload_form_url', array($this, 'add_my_context_to_url'), 10, 2);
+                return TRUE;
+                } 
+            return FALSE;
+            }
 	} //end class
 	
 //INSTANTIATE THE CLASS
