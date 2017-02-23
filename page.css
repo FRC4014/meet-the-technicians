@@ -31,12 +31,12 @@
     padding: 5px;
     padding-top: 10px;
     }
-#mt .person:hover .text{
+#mt .person:hover .text, #mt .person:active .text{
     width: auto;
     height: auto;
     padding: 15px;
 }
-#mt .person:hover {
+#mt .person:hover, #mt .person:active {
     padding-top: 20px;
     min-height: 290px;
     width: 290px;
@@ -61,11 +61,11 @@
 #mt .label{
     display: none;
     }
-#mt .person:hover .field {
+#mt .person:hover .field, #mt .person:active .field {
     display: block !important;
     opacity: 1;
     }
-#mt .person:hover .label {
+#mt .person:hover .label, #mt .person:active .label {
     margin-top: 6px;
     display: block;
     font-weight: bold;
@@ -76,7 +76,7 @@
     margin-top: 5px;
     margin-bottom: 10px;
     }
-#mt .person:hover .name{
+#mt .person:hover .name, #mt .person:active .name{
     margin-bottom: 20px;
     }
 .field.description{
@@ -93,7 +93,7 @@
     font-size: 14pt;
     padding: 10px 20px;
     }
-.person#join .call-to-action .button:hover {
+.person#join .call-to-action .button:hover, .person#join .call-to-action .button:active {
     background-color: #4d99e2;
     }
 .person#join .field.name{
@@ -101,9 +101,9 @@
     margin-top: 20px;
     transition: font-size 1s;
 }
-.person#join:hover .field.name{
+.person#join:hover .field.name, .person#join:active .field.name{
     margin: 25px 0px;
 }
-.person#join:hover{
+.person#join:hover, .person#join:active{
     padding: 0px;
 }
