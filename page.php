@@ -1,7 +1,7 @@
 <?php //file to output to the page using $the_content.  Included in meet-the-technicians.php.
 
 $people = $this->getAll();
-$the_content = '';
+$the_content = '<center><em>Rollover or tap on a technician to see the full profile</em></center>';
 shuffle($people); //randomize order
 
 $the_content .=  '<div id="mt">';
